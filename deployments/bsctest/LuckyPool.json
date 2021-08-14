@@ -1,0 +1,1003 @@
+{
+  "address": "0xc54143b3053386c86a293C12eCB348F3B50667aF",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "contract IRandom",
+          "name": "_random",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "luckyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "LuckyPoolBegin",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "luckyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "contract IKeplerPair",
+          "name": "pair",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "lucky",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "best",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "reward0",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "reward1",
+          "type": "uint256"
+        }
+      ],
+      "name": "LuckyPoolClaim",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "luckyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "countAt",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "openAt",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "finishAt",
+          "type": "uint256"
+        }
+      ],
+      "name": "LuckyPoolOpen",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "luckyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "contract IKeplerPair",
+          "name": "pair",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "userNum",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "reward0",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "reward1",
+          "type": "uint256"
+        }
+      ],
+      "name": "LuckyPoolRewardInfo",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "BEST_WINER_NUM",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "CLAIM_WAIT",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "OPEN_WAIT",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "TOTAL_WINER_NUM",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "WINER_NUM",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "contract IKeplerPair",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "avaliableUsers",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "beginLuckyPool",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IKeplerPair",
+          "name": "pair",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "r",
+          "type": "string"
+        }
+      ],
+      "name": "claim",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "currentPoolId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IKeplerPair",
+          "name": "_pair",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_token",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "doHardWork",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "luckyInfos",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "beginAt",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "countAt",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "openAt",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "finishAt",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "luckyPairsNum",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "contract IKeplerPair",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "luckyPairs",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "contract IKeplerPair",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "luckyUsers0",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "contract IKeplerPair",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "luckyUsers1",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "users",
+          "type": "address[]"
+        },
+        {
+          "internalType": "contract IKeplerPair[]",
+          "name": "pairs",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "perPairNum",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "openLuckyPool",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "contract IKeplerPair",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "openUsers",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "random",
+      "outputs": [
+        {
+          "internalType": "contract IRandom",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IKeplerPair",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "receiveAmounts",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "contract IKeplerPair",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "rewardInfos",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "avaliableUserNum",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "openUserNum",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "bestUser",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "luckyUserNum",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "reward0",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "reward1",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "rewardPoolId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IRandom",
+          "name": "_random",
+          "type": "address"
+        }
+      ],
+      "name": "setRandom",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0xe5b719f586f2253a6d123fe93f93bcda3d9340156d5fa6e6d9567869037f091c",
+  "receipt": {
+    "to": null,
+    "from": "0x92Ac13DfFf2e421e53dFD2873Ea295EdC9504764",
+    "contractAddress": "0xc54143b3053386c86a293C12eCB348F3B50667aF",
+    "transactionIndex": 3,
+    "gasUsed": "2202138",
+    "logsBloom": "0x00000000100000000000000000000000000000000000000000800002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002000000000001000000000000000000000000000000000000020000000000000000000800004000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000400000000000000001000000000000000000000040000000000000000000000000000000020000000000000000020000000000000000000000000000000000000000000000000000000000040000000",
+    "blockHash": "0xcc9392c3fd065cb91a435768a8f9b0be02d278a3f6e4faac7dc66801b84cd0f1",
+    "transactionHash": "0xe5b719f586f2253a6d123fe93f93bcda3d9340156d5fa6e6d9567869037f091c",
+    "logs": [
+      {
+        "transactionIndex": 3,
+        "blockNumber": 11456526,
+        "transactionHash": "0xe5b719f586f2253a6d123fe93f93bcda3d9340156d5fa6e6d9567869037f091c",
+        "address": "0xc54143b3053386c86a293C12eCB348F3B50667aF",
+        "topics": [
+          "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x00000000000000000000000092ac13dfff2e421e53dfd2873ea295edc9504764"
+        ],
+        "data": "0x",
+        "logIndex": 6,
+        "blockHash": "0xcc9392c3fd065cb91a435768a8f9b0be02d278a3f6e4faac7dc66801b84cd0f1"
+      },
+      {
+        "transactionIndex": 3,
+        "blockNumber": 11456526,
+        "transactionHash": "0xe5b719f586f2253a6d123fe93f93bcda3d9340156d5fa6e6d9567869037f091c",
+        "address": "0xc54143b3053386c86a293C12eCB348F3B50667aF",
+        "topics": [
+          "0xf54544980c2cb53c7f24ba0544d0e589b21cfd823d23bb10dee28b6814b20b5c"
+        ],
+        "data": "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006116fc36",
+        "logIndex": 7,
+        "blockHash": "0xcc9392c3fd065cb91a435768a8f9b0be02d278a3f6e4faac7dc66801b84cd0f1"
+      }
+    ],
+    "blockNumber": 11456526,
+    "cumulativeGasUsed": "2506668",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0x137c69964165Ec7c0f50Fc2dFA89168569156ad1"
+  ],
+  "solcInputHash": "251284aae9794742e975b7948d7b4689",
+  "metadata": "{\"compiler\":{\"version\":\"0.7.6+commit.7338295f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract IRandom\",\"name\":\"_random\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"luckyId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"LuckyPoolBegin\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"luckyId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"contract IKeplerPair\",\"name\":\"pair\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"lucky\",\"type\":\"bool\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"best\",\"type\":\"bool\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"reward0\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"reward1\",\"type\":\"uint256\"}],\"name\":\"LuckyPoolClaim\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"luckyId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"countAt\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"openAt\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"finishAt\",\"type\":\"uint256\"}],\"name\":\"LuckyPoolOpen\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"luckyId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"contract IKeplerPair\",\"name\":\"pair\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"userNum\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"reward0\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"reward1\",\"type\":\"uint256\"}],\"name\":\"LuckyPoolRewardInfo\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"BEST_WINER_NUM\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"CLAIM_WAIT\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"OPEN_WAIT\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"TOTAL_WINER_NUM\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"WINER_NUM\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"contract IKeplerPair\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"avaliableUsers\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"beginLuckyPool\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IKeplerPair\",\"name\":\"pair\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"r\",\"type\":\"string\"}],\"name\":\"claim\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"currentPoolId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IKeplerPair\",\"name\":\"_pair\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"doHardWork\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"luckyInfos\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"beginAt\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"countAt\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"openAt\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"finishAt\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"luckyPairsNum\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"contract IKeplerPair\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"luckyPairs\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"contract IKeplerPair\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"luckyUsers0\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"contract IKeplerPair\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"luckyUsers1\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"users\",\"type\":\"address[]\"},{\"internalType\":\"contract IKeplerPair[]\",\"name\":\"pairs\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"perPairNum\",\"type\":\"uint256[]\"}],\"name\":\"openLuckyPool\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"contract IKeplerPair\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"openUsers\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"random\",\"outputs\":[{\"internalType\":\"contract IRandom\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IKeplerPair\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"receiveAmounts\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"contract IKeplerPair\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"rewardInfos\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"avaliableUserNum\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"openUserNum\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"bestUser\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"luckyUserNum\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"reward0\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"reward1\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"rewardPoolId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IRandom\",\"name\":\"_random\",\"type\":\"address\"}],\"name\":\"setRandom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/farm/LuckyPool.sol\":\"LuckyPool\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/access/Ownable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity >=0.6.0 <0.8.0;\\n\\nimport \\\"../utils/Context.sol\\\";\\n/**\\n * @dev Contract module which provides a basic access control mechanism, where\\n * there is an account (an owner) that can be granted exclusive access to\\n * specific functions.\\n *\\n * By default, the owner account will be the one that deploys the contract. This\\n * can later be changed with {transferOwnership}.\\n *\\n * This module is used through inheritance. It will make available the modifier\\n * `onlyOwner`, which can be applied to your functions to restrict their use to\\n * the owner.\\n */\\nabstract contract Ownable is Context {\\n    address private _owner;\\n\\n    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);\\n\\n    /**\\n     * @dev Initializes the contract setting the deployer as the initial owner.\\n     */\\n    constructor () internal {\\n        address msgSender = _msgSender();\\n        _owner = msgSender;\\n        emit OwnershipTransferred(address(0), msgSender);\\n    }\\n\\n    /**\\n     * @dev Returns the address of the current owner.\\n     */\\n    function owner() public view virtual returns (address) {\\n        return _owner;\\n    }\\n\\n    /**\\n     * @dev Throws if called by any account other than the owner.\\n     */\\n    modifier onlyOwner() {\\n        require(owner() == _msgSender(), \\\"Ownable: caller is not the owner\\\");\\n        _;\\n    }\\n\\n    /**\\n     * @dev Leaves the contract without owner. It will not be possible to call\\n     * `onlyOwner` functions anymore. Can only be called by the current owner.\\n     *\\n     * NOTE: Renouncing ownership will leave the contract without an owner,\\n     * thereby removing any functionality that is only available to the owner.\\n     */\\n    function renounceOwnership() public virtual onlyOwner {\\n        emit OwnershipTransferred(_owner, address(0));\\n        _owner = address(0);\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Can only be called by the current owner.\\n     */\\n    function transferOwnership(address newOwner) public virtual onlyOwner {\\n        require(newOwner != address(0), \\\"Ownable: new owner is the zero address\\\");\\n        emit OwnershipTransferred(_owner, newOwner);\\n        _owner = newOwner;\\n    }\\n}\\n\",\"keccak256\":\"0x15e2d5bd4c28a88548074c54d220e8086f638a71ed07e6b3ba5a70066fcf458d\",\"license\":\"MIT\"},\"@openzeppelin/contracts/math/SafeMath.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity >=0.6.0 <0.8.0;\\n\\n/**\\n * @dev Wrappers over Solidity's arithmetic operations with added overflow\\n * checks.\\n *\\n * Arithmetic operations in Solidity wrap on overflow. This can easily result\\n * in bugs, because programmers usually assume that an overflow raises an\\n * error, which is the standard behavior in high level programming languages.\\n * `SafeMath` restores this intuition by reverting the transaction when an\\n * operation overflows.\\n *\\n * Using this library instead of the unchecked operations eliminates an entire\\n * class of bugs, so it's recommended to use it always.\\n */\\nlibrary SafeMath {\\n    /**\\n     * @dev Returns the addition of two unsigned integers, with an overflow flag.\\n     *\\n     * _Available since v3.4._\\n     */\\n    function tryAdd(uint256 a, uint256 b) internal pure returns (bool, uint256) {\\n        uint256 c = a + b;\\n        if (c < a) return (false, 0);\\n        return (true, c);\\n    }\\n\\n    /**\\n     * @dev Returns the substraction of two unsigned integers, with an overflow flag.\\n     *\\n     * _Available since v3.4._\\n     */\\n    function trySub(uint256 a, uint256 b) internal pure returns (bool, uint256) {\\n        if (b > a) return (false, 0);\\n        return (true, a - b);\\n    }\\n\\n    /**\\n     * @dev Returns the multiplication of two unsigned integers, with an overflow flag.\\n     *\\n     * _Available since v3.4._\\n     */\\n    function tryMul(uint256 a, uint256 b) internal pure returns (bool, uint256) {\\n        // Gas optimization: this is cheaper than requiring 'a' not being zero, but the\\n        // benefit is lost if 'b' is also tested.\\n        // See: https://github.com/OpenZeppelin/openzeppelin-contracts/pull/522\\n        if (a == 0) return (true, 0);\\n        uint256 c = a * b;\\n        if (c / a != b) return (false, 0);\\n        return (true, c);\\n    }\\n\\n    /**\\n     * @dev Returns the division of two unsigned integers, with a division by zero flag.\\n     *\\n     * _Available since v3.4._\\n     */\\n    function tryDiv(uint256 a, uint256 b) internal pure returns (bool, uint256) {\\n        if (b == 0) return (false, 0);\\n        return (true, a / b);\\n    }\\n\\n    /**\\n     * @dev Returns the remainder of dividing two unsigned integers, with a division by zero flag.\\n     *\\n     * _Available since v3.4._\\n     */\\n    function tryMod(uint256 a, uint256 b) internal pure returns (bool, uint256) {\\n        if (b == 0) return (false, 0);\\n        return (true, a % b);\\n    }\\n\\n    /**\\n     * @dev Returns the addition of two unsigned integers, reverting on\\n     * overflow.\\n     *\\n     * Counterpart to Solidity's `+` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - Addition cannot overflow.\\n     */\\n    function add(uint256 a, uint256 b) internal pure returns (uint256) {\\n        uint256 c = a + b;\\n        require(c >= a, \\\"SafeMath: addition overflow\\\");\\n        return c;\\n    }\\n\\n    /**\\n     * @dev Returns the subtraction of two unsigned integers, reverting on\\n     * overflow (when the result is negative).\\n     *\\n     * Counterpart to Solidity's `-` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - Subtraction cannot overflow.\\n     */\\n    function sub(uint256 a, uint256 b) internal pure returns (uint256) {\\n        require(b <= a, \\\"SafeMath: subtraction overflow\\\");\\n        return a - b;\\n    }\\n\\n    /**\\n     * @dev Returns the multiplication of two unsigned integers, reverting on\\n     * overflow.\\n     *\\n     * Counterpart to Solidity's `*` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - Multiplication cannot overflow.\\n     */\\n    function mul(uint256 a, uint256 b) internal pure returns (uint256) {\\n        if (a == 0) return 0;\\n        uint256 c = a * b;\\n        require(c / a == b, \\\"SafeMath: multiplication overflow\\\");\\n        return c;\\n    }\\n\\n    /**\\n     * @dev Returns the integer division of two unsigned integers, reverting on\\n     * division by zero. The result is rounded towards zero.\\n     *\\n     * Counterpart to Solidity's `/` operator. Note: this function uses a\\n     * `revert` opcode (which leaves remaining gas untouched) while Solidity\\n     * uses an invalid opcode to revert (consuming all remaining gas).\\n     *\\n     * Requirements:\\n     *\\n     * - The divisor cannot be zero.\\n     */\\n    function div(uint256 a, uint256 b) internal pure returns (uint256) {\\n        require(b > 0, \\\"SafeMath: division by zero\\\");\\n        return a / b;\\n    }\\n\\n    /**\\n     * @dev Returns the remainder of dividing two unsigned integers. (unsigned integer modulo),\\n     * reverting when dividing by zero.\\n     *\\n     * Counterpart to Solidity's `%` operator. This function uses a `revert`\\n     * opcode (which leaves remaining gas untouched) while Solidity uses an\\n     * invalid opcode to revert (consuming all remaining gas).\\n     *\\n     * Requirements:\\n     *\\n     * - The divisor cannot be zero.\\n     */\\n    function mod(uint256 a, uint256 b) internal pure returns (uint256) {\\n        require(b > 0, \\\"SafeMath: modulo by zero\\\");\\n        return a % b;\\n    }\\n\\n    /**\\n     * @dev Returns the subtraction of two unsigned integers, reverting with custom message on\\n     * overflow (when the result is negative).\\n     *\\n     * CAUTION: This function is deprecated because it requires allocating memory for the error\\n     * message unnecessarily. For custom revert reasons use {trySub}.\\n     *\\n     * Counterpart to Solidity's `-` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - Subtraction cannot overflow.\\n     */\\n    function sub(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {\\n        require(b <= a, errorMessage);\\n        return a - b;\\n    }\\n\\n    /**\\n     * @dev Returns the integer division of two unsigned integers, reverting with custom message on\\n     * division by zero. The result is rounded towards zero.\\n     *\\n     * CAUTION: This function is deprecated because it requires allocating memory for the error\\n     * message unnecessarily. For custom revert reasons use {tryDiv}.\\n     *\\n     * Counterpart to Solidity's `/` operator. Note: this function uses a\\n     * `revert` opcode (which leaves remaining gas untouched) while Solidity\\n     * uses an invalid opcode to revert (consuming all remaining gas).\\n     *\\n     * Requirements:\\n     *\\n     * - The divisor cannot be zero.\\n     */\\n    function div(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {\\n        require(b > 0, errorMessage);\\n        return a / b;\\n    }\\n\\n    /**\\n     * @dev Returns the remainder of dividing two unsigned integers. (unsigned integer modulo),\\n     * reverting with custom message when dividing by zero.\\n     *\\n     * CAUTION: This function is deprecated because it requires allocating memory for the error\\n     * message unnecessarily. For custom revert reasons use {tryMod}.\\n     *\\n     * Counterpart to Solidity's `%` operator. This function uses a `revert`\\n     * opcode (which leaves remaining gas untouched) while Solidity uses an\\n     * invalid opcode to revert (consuming all remaining gas).\\n     *\\n     * Requirements:\\n     *\\n     * - The divisor cannot be zero.\\n     */\\n    function mod(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {\\n        require(b > 0, errorMessage);\\n        return a % b;\\n    }\\n}\\n\",\"keccak256\":\"0xcc78a17dd88fa5a2edc60c8489e2f405c0913b377216a5b26b35656b2d0dab52\",\"license\":\"MIT\"},\"@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity >=0.6.0 <0.8.0;\\n\\n/**\\n * @dev Interface of the ERC20 standard as defined in the EIP.\\n */\\ninterface IERC20 {\\n    /**\\n     * @dev Returns the amount of tokens in existence.\\n     */\\n    function totalSupply() external view returns (uint256);\\n\\n    /**\\n     * @dev Returns the amount of tokens owned by `account`.\\n     */\\n    function balanceOf(address account) external view returns (uint256);\\n\\n    /**\\n     * @dev Moves `amount` tokens from the caller's account to `recipient`.\\n     *\\n     * Returns a boolean value indicating whether the operation succeeded.\\n     *\\n     * Emits a {Transfer} event.\\n     */\\n    function transfer(address recipient, uint256 amount) external returns (bool);\\n\\n    /**\\n     * @dev Returns the remaining number of tokens that `spender` will be\\n     * allowed to spend on behalf of `owner` through {transferFrom}. This is\\n     * zero by default.\\n     *\\n     * This value changes when {approve} or {transferFrom} are called.\\n     */\\n    function allowance(address owner, address spender) external view returns (uint256);\\n\\n    /**\\n     * @dev Sets `amount` as the allowance of `spender` over the caller's tokens.\\n     *\\n     * Returns a boolean value indicating whether the operation succeeded.\\n     *\\n     * IMPORTANT: Beware that changing an allowance with this method brings the risk\\n     * that someone may use both the old and the new allowance by unfortunate\\n     * transaction ordering. One possible solution to mitigate this race\\n     * condition is to first reduce the spender's allowance to 0 and set the\\n     * desired value afterwards:\\n     * https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729\\n     *\\n     * Emits an {Approval} event.\\n     */\\n    function approve(address spender, uint256 amount) external returns (bool);\\n\\n    /**\\n     * @dev Moves `amount` tokens from `sender` to `recipient` using the\\n     * allowance mechanism. `amount` is then deducted from the caller's\\n     * allowance.\\n     *\\n     * Returns a boolean value indicating whether the operation succeeded.\\n     *\\n     * Emits a {Transfer} event.\\n     */\\n    function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);\\n\\n    /**\\n     * @dev Emitted when `value` tokens are moved from one account (`from`) to\\n     * another (`to`).\\n     *\\n     * Note that `value` may be zero.\\n     */\\n    event Transfer(address indexed from, address indexed to, uint256 value);\\n\\n    /**\\n     * @dev Emitted when the allowance of a `spender` for an `owner` is set by\\n     * a call to {approve}. `value` is the new allowance.\\n     */\\n    event Approval(address indexed owner, address indexed spender, uint256 value);\\n}\\n\",\"keccak256\":\"0x5f02220344881ce43204ae4a6281145a67bc52c2bb1290a791857df3d19d78f5\",\"license\":\"MIT\"},\"@openzeppelin/contracts/token/ERC20/SafeERC20.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity >=0.6.0 <0.8.0;\\n\\nimport \\\"./IERC20.sol\\\";\\nimport \\\"../../math/SafeMath.sol\\\";\\nimport \\\"../../utils/Address.sol\\\";\\n\\n/**\\n * @title SafeERC20\\n * @dev Wrappers around ERC20 operations that throw on failure (when the token\\n * contract returns false). Tokens that return no value (and instead revert or\\n * throw on failure) are also supported, non-reverting calls are assumed to be\\n * successful.\\n * To use this library you can add a `using SafeERC20 for IERC20;` statement to your contract,\\n * which allows you to call the safe operations as `token.safeTransfer(...)`, etc.\\n */\\nlibrary SafeERC20 {\\n    using SafeMath for uint256;\\n    using Address for address;\\n\\n    function safeTransfer(IERC20 token, address to, uint256 value) internal {\\n        _callOptionalReturn(token, abi.encodeWithSelector(token.transfer.selector, to, value));\\n    }\\n\\n    function safeTransferFrom(IERC20 token, address from, address to, uint256 value) internal {\\n        _callOptionalReturn(token, abi.encodeWithSelector(token.transferFrom.selector, from, to, value));\\n    }\\n\\n    /**\\n     * @dev Deprecated. This function has issues similar to the ones found in\\n     * {IERC20-approve}, and its usage is discouraged.\\n     *\\n     * Whenever possible, use {safeIncreaseAllowance} and\\n     * {safeDecreaseAllowance} instead.\\n     */\\n    function safeApprove(IERC20 token, address spender, uint256 value) internal {\\n        // safeApprove should only be called when setting an initial allowance,\\n        // or when resetting it to zero. To increase and decrease it, use\\n        // 'safeIncreaseAllowance' and 'safeDecreaseAllowance'\\n        // solhint-disable-next-line max-line-length\\n        require((value == 0) || (token.allowance(address(this), spender) == 0),\\n            \\\"SafeERC20: approve from non-zero to non-zero allowance\\\"\\n        );\\n        _callOptionalReturn(token, abi.encodeWithSelector(token.approve.selector, spender, value));\\n    }\\n\\n    function safeIncreaseAllowance(IERC20 token, address spender, uint256 value) internal {\\n        uint256 newAllowance = token.allowance(address(this), spender).add(value);\\n        _callOptionalReturn(token, abi.encodeWithSelector(token.approve.selector, spender, newAllowance));\\n    }\\n\\n    function safeDecreaseAllowance(IERC20 token, address spender, uint256 value) internal {\\n        uint256 newAllowance = token.allowance(address(this), spender).sub(value, \\\"SafeERC20: decreased allowance below zero\\\");\\n        _callOptionalReturn(token, abi.encodeWithSelector(token.approve.selector, spender, newAllowance));\\n    }\\n\\n    /**\\n     * @dev Imitates a Solidity high-level call (i.e. a regular function call to a contract), relaxing the requirement\\n     * on the return value: the return value is optional (but if data is returned, it must not be false).\\n     * @param token The token targeted by the call.\\n     * @param data The call data (encoded using abi.encode or one of its variants).\\n     */\\n    function _callOptionalReturn(IERC20 token, bytes memory data) private {\\n        // We need to perform a low level call here, to bypass Solidity's return data size checking mechanism, since\\n        // we're implementing it ourselves. We use {Address.functionCall} to perform this call, which verifies that\\n        // the target address contains contract code and also asserts for success in the low-level call.\\n\\n        bytes memory returndata = address(token).functionCall(data, \\\"SafeERC20: low-level call failed\\\");\\n        if (returndata.length > 0) { // Return data is optional\\n            // solhint-disable-next-line max-line-length\\n            require(abi.decode(returndata, (bool)), \\\"SafeERC20: ERC20 operation did not succeed\\\");\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0xf12dfbe97e6276980b83d2830bb0eb75e0cf4f3e626c2471137f82158ae6a0fc\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/Address.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity >=0.6.2 <0.8.0;\\n\\n/**\\n * @dev Collection of functions related to the address type\\n */\\nlibrary Address {\\n    /**\\n     * @dev Returns true if `account` is a contract.\\n     *\\n     * [IMPORTANT]\\n     * ====\\n     * It is unsafe to assume that an address for which this function returns\\n     * false is an externally-owned account (EOA) and not a contract.\\n     *\\n     * Among others, `isContract` will return false for the following\\n     * types of addresses:\\n     *\\n     *  - an externally-owned account\\n     *  - a contract in construction\\n     *  - an address where a contract will be created\\n     *  - an address where a contract lived, but was destroyed\\n     * ====\\n     */\\n    function isContract(address account) internal view returns (bool) {\\n        // This method relies on extcodesize, which returns 0 for contracts in\\n        // construction, since the code is only stored at the end of the\\n        // constructor execution.\\n\\n        uint256 size;\\n        // solhint-disable-next-line no-inline-assembly\\n        assembly { size := extcodesize(account) }\\n        return size > 0;\\n    }\\n\\n    /**\\n     * @dev Replacement for Solidity's `transfer`: sends `amount` wei to\\n     * `recipient`, forwarding all available gas and reverting on errors.\\n     *\\n     * https://eips.ethereum.org/EIPS/eip-1884[EIP1884] increases the gas cost\\n     * of certain opcodes, possibly making contracts go over the 2300 gas limit\\n     * imposed by `transfer`, making them unable to receive funds via\\n     * `transfer`. {sendValue} removes this limitation.\\n     *\\n     * https://diligence.consensys.net/posts/2019/09/stop-using-soliditys-transfer-now/[Learn more].\\n     *\\n     * IMPORTANT: because control is transferred to `recipient`, care must be\\n     * taken to not create reentrancy vulnerabilities. Consider using\\n     * {ReentrancyGuard} or the\\n     * https://solidity.readthedocs.io/en/v0.5.11/security-considerations.html#use-the-checks-effects-interactions-pattern[checks-effects-interactions pattern].\\n     */\\n    function sendValue(address payable recipient, uint256 amount) internal {\\n        require(address(this).balance >= amount, \\\"Address: insufficient balance\\\");\\n\\n        // solhint-disable-next-line avoid-low-level-calls, avoid-call-value\\n        (bool success, ) = recipient.call{ value: amount }(\\\"\\\");\\n        require(success, \\\"Address: unable to send value, recipient may have reverted\\\");\\n    }\\n\\n    /**\\n     * @dev Performs a Solidity function call using a low level `call`. A\\n     * plain`call` is an unsafe replacement for a function call: use this\\n     * function instead.\\n     *\\n     * If `target` reverts with a revert reason, it is bubbled up by this\\n     * function (like regular Solidity function calls).\\n     *\\n     * Returns the raw returned data. To convert to the expected return value,\\n     * use https://solidity.readthedocs.io/en/latest/units-and-global-variables.html?highlight=abi.decode#abi-encoding-and-decoding-functions[`abi.decode`].\\n     *\\n     * Requirements:\\n     *\\n     * - `target` must be a contract.\\n     * - calling `target` with `data` must not revert.\\n     *\\n     * _Available since v3.1._\\n     */\\n    function functionCall(address target, bytes memory data) internal returns (bytes memory) {\\n      return functionCall(target, data, \\\"Address: low-level call failed\\\");\\n    }\\n\\n    /**\\n     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`], but with\\n     * `errorMessage` as a fallback revert reason when `target` reverts.\\n     *\\n     * _Available since v3.1._\\n     */\\n    function functionCall(address target, bytes memory data, string memory errorMessage) internal returns (bytes memory) {\\n        return functionCallWithValue(target, data, 0, errorMessage);\\n    }\\n\\n    /**\\n     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`],\\n     * but also transferring `value` wei to `target`.\\n     *\\n     * Requirements:\\n     *\\n     * - the calling contract must have an ETH balance of at least `value`.\\n     * - the called Solidity function must be `payable`.\\n     *\\n     * _Available since v3.1._\\n     */\\n    function functionCallWithValue(address target, bytes memory data, uint256 value) internal returns (bytes memory) {\\n        return functionCallWithValue(target, data, value, \\\"Address: low-level call with value failed\\\");\\n    }\\n\\n    /**\\n     * @dev Same as {xref-Address-functionCallWithValue-address-bytes-uint256-}[`functionCallWithValue`], but\\n     * with `errorMessage` as a fallback revert reason when `target` reverts.\\n     *\\n     * _Available since v3.1._\\n     */\\n    function functionCallWithValue(address target, bytes memory data, uint256 value, string memory errorMessage) internal returns (bytes memory) {\\n        require(address(this).balance >= value, \\\"Address: insufficient balance for call\\\");\\n        require(isContract(target), \\\"Address: call to non-contract\\\");\\n\\n        // solhint-disable-next-line avoid-low-level-calls\\n        (bool success, bytes memory returndata) = target.call{ value: value }(data);\\n        return _verifyCallResult(success, returndata, errorMessage);\\n    }\\n\\n    /**\\n     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`],\\n     * but performing a static call.\\n     *\\n     * _Available since v3.3._\\n     */\\n    function functionStaticCall(address target, bytes memory data) internal view returns (bytes memory) {\\n        return functionStaticCall(target, data, \\\"Address: low-level static call failed\\\");\\n    }\\n\\n    /**\\n     * @dev Same as {xref-Address-functionCall-address-bytes-string-}[`functionCall`],\\n     * but performing a static call.\\n     *\\n     * _Available since v3.3._\\n     */\\n    function functionStaticCall(address target, bytes memory data, string memory errorMessage) internal view returns (bytes memory) {\\n        require(isContract(target), \\\"Address: static call to non-contract\\\");\\n\\n        // solhint-disable-next-line avoid-low-level-calls\\n        (bool success, bytes memory returndata) = target.staticcall(data);\\n        return _verifyCallResult(success, returndata, errorMessage);\\n    }\\n\\n    /**\\n     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`],\\n     * but performing a delegate call.\\n     *\\n     * _Available since v3.4._\\n     */\\n    function functionDelegateCall(address target, bytes memory data) internal returns (bytes memory) {\\n        return functionDelegateCall(target, data, \\\"Address: low-level delegate call failed\\\");\\n    }\\n\\n    /**\\n     * @dev Same as {xref-Address-functionCall-address-bytes-string-}[`functionCall`],\\n     * but performing a delegate call.\\n     *\\n     * _Available since v3.4._\\n     */\\n    function functionDelegateCall(address target, bytes memory data, string memory errorMessage) internal returns (bytes memory) {\\n        require(isContract(target), \\\"Address: delegate call to non-contract\\\");\\n\\n        // solhint-disable-next-line avoid-low-level-calls\\n        (bool success, bytes memory returndata) = target.delegatecall(data);\\n        return _verifyCallResult(success, returndata, errorMessage);\\n    }\\n\\n    function _verifyCallResult(bool success, bytes memory returndata, string memory errorMessage) private pure returns(bytes memory) {\\n        if (success) {\\n            return returndata;\\n        } else {\\n            // Look for revert reason and bubble it up if present\\n            if (returndata.length > 0) {\\n                // The easiest way to bubble the revert reason is using memory via assembly\\n\\n                // solhint-disable-next-line no-inline-assembly\\n                assembly {\\n                    let returndata_size := mload(returndata)\\n                    revert(add(32, returndata), returndata_size)\\n                }\\n            } else {\\n                revert(errorMessage);\\n            }\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0x28911e614500ae7c607a432a709d35da25f3bc5ddc8bd12b278b66358070c0ea\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/Context.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity >=0.6.0 <0.8.0;\\n\\n/*\\n * @dev Provides information about the current execution context, including the\\n * sender of the transaction and its data. While these are generally available\\n * via msg.sender and msg.data, they should not be accessed in such a direct\\n * manner, since when dealing with GSN meta-transactions the account sending and\\n * paying for execution may not be the actual sender (as far as an application\\n * is concerned).\\n *\\n * This contract is only required for intermediate, library-like contracts.\\n */\\nabstract contract Context {\\n    function _msgSender() internal view virtual returns (address payable) {\\n        return msg.sender;\\n    }\\n\\n    function _msgData() internal view virtual returns (bytes memory) {\\n        this; // silence state mutability warning without generating bytecode - see https://github.com/ethereum/solidity/issues/2691\\n        return msg.data;\\n    }\\n}\\n\",\"keccak256\":\"0x8d3cb350f04ff49cfb10aef08d87f19dcbaecc8027b0bed12f3275cd12f38cf0\",\"license\":\"MIT\"},\"contracts/farm/LuckyPool.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity >=0.7.2;\\n\\nimport '@openzeppelin/contracts/math/SafeMath.sol';\\nimport '@openzeppelin/contracts/access/Ownable.sol';\\nimport '@openzeppelin/contracts/token/ERC20/IERC20.sol';\\nimport '@openzeppelin/contracts/token/ERC20/SafeERC20.sol';\\nimport '@openzeppelin/contracts/utils/Address.sol';\\nimport '../interfaces/IKeplerPair.sol';\\nimport '../interfaces/IRandom.sol';\\nimport '../interfaces/IUser.sol';\\nimport 'hardhat/console.sol';\\n\\ncontract LuckyPool is Ownable {\\n    using SafeMath for uint256;\\n    using Address for address;\\n\\n    uint256 constant public WINER_NUM = 1;\\n    uint256 constant public BEST_WINER_NUM = 1;\\n    uint256 constant public TOTAL_WINER_NUM = WINER_NUM + BEST_WINER_NUM;\\n    //uint256 constant public OPEN_WAIT = 3600;\\n    uint256 constant public OPEN_WAIT = 60;\\n    //uint256 constant public CLAIM_WAIT = 3 * 24 * 3600;\\n    uint256 constant public CLAIM_WAIT = 3600;\\n\\n    event LuckyPoolBegin(uint256 luckyId, uint256 timestamp);\\n    event LuckyPoolOpen(uint256 luckyId, uint256 countAt, uint256 openAt, uint256 finishAt);\\n    event LuckyPoolRewardInfo(uint256 luckyId, IKeplerPair pair, uint256 userNum, uint256 reward0, uint256 reward1);\\n    event LuckyPoolClaim(uint256 luckyId, address user, IKeplerPair pair, bool lucky, bool best, uint256 reward0, uint256 reward1);\\n\\n    mapping(IKeplerPair => mapping(address => uint256)) public receiveAmounts;\\n\\n    function doHardWork(IKeplerPair _pair, address _token, uint256 _amount) external {\\n        SafeERC20.safeTransferFrom(IERC20(_token), msg.sender, address(this), _amount);\\n        receiveAmounts[_pair][_token] += _amount;\\n    }\\n\\n    struct LuckyInfo {\\n        uint256 beginAt;\\n        uint256 countAt;\\n        uint256 openAt;\\n        uint256 finishAt;\\n        uint256 luckyPairsNum;\\n    }\\n    LuckyInfo[] public luckyInfos;\\n    mapping(uint256 => mapping(IKeplerPair => bool)) public luckyPairs;\\n\\n    function beginLuckyPool() public onlyOwner {\\n        if (luckyInfos.length > 0) {\\n            LuckyInfo storage luckyInfo = luckyInfos[luckyInfos.length - 1];\\n            if (luckyInfo.countAt == 0) {\\n                return;\\n            }\\n        }\\n        luckyInfos.push(LuckyInfo({\\n            beginAt: block.timestamp,\\n            countAt: 0,\\n            openAt: 0,\\n            finishAt: 0,\\n            luckyPairsNum: 0\\n        }));\\n        emit LuckyPoolBegin(luckyInfos.length - 1, block.timestamp);\\n    }\\n\\n    struct RewardInfo {\\n        uint256 avaliableUserNum;\\n        uint256 openUserNum;\\n        address bestUser;\\n        uint256 luckyUserNum;\\n        uint256 reward0;\\n        uint256 reward1;\\n    }\\n    mapping(uint256 => mapping(IKeplerPair => RewardInfo)) public rewardInfos;\\n    mapping(uint256 => mapping(IKeplerPair => mapping(address => bool))) public avaliableUsers;\\n    mapping(uint256 => mapping(IKeplerPair => mapping(address => bool))) public openUsers;\\n    mapping(uint256 => mapping(IKeplerPair => mapping(address => uint256))) public luckyUsers0;\\n    mapping(uint256 => mapping(IKeplerPair => mapping(address => uint256))) public luckyUsers1;\\n\\n    function openLuckyPool(address[] calldata users, IKeplerPair[] calldata pairs, uint256[] calldata perPairNum) external onlyOwner {\\n        LuckyInfo memory luckyInfo; \\n        uint256 luckyInfoIndex = uint256(-1);\\n        if (luckyInfos.length > 0) {\\n            luckyInfo = luckyInfos[luckyInfos.length -1];\\n            if (luckyInfos.length > 1 && luckyInfo.countAt == 0) {\\n                luckyInfo = luckyInfos[luckyInfos.length - 2];\\n                luckyInfoIndex = luckyInfos.length - 2;\\n            } else {\\n                luckyInfoIndex = luckyInfos.length - 1;\\n            }\\n            if (luckyInfo.finishAt <= block.timestamp) {\\n                luckyInfo = luckyInfos[luckyInfos.length - 1];\\n                luckyInfoIndex = luckyInfos.length - 1;\\n            }\\n            require(luckyInfo.openAt == 0 || luckyInfo.openAt >= block.timestamp, \\\"lucky pool already open\\\");\\n        }\\n        require(luckyInfoIndex != uint256(-1), \\\"lucky pool not begin\\\");\\n        require(pairs.length == perPairNum.length, \\\"illegal pair num\\\");\\n        uint userIndex = 0;\\n        for(uint i = 0; i < pairs.length; i ++) {\\n            uint avaliableUserNum = 0;\\n            for (uint j = 0; j < perPairNum[i]; j ++) {\\n                require(users.length > userIndex, \\\"illegal user length\\\");\\n                address user = users[userIndex];\\n                userIndex ++;\\n                if (!avaliableUsers[luckyInfoIndex][pairs[i]][user]) {\\n                    avaliableUsers[luckyInfoIndex][pairs[i]][user] = true;\\n                    avaliableUserNum ++;\\n                }\\n            }\\n            if (avaliableUserNum > 0) {\\n                rewardInfos[luckyInfoIndex][pairs[i]].avaliableUserNum = rewardInfos[luckyInfoIndex][pairs[i]].avaliableUserNum + avaliableUserNum; \\n                rewardInfos[luckyInfoIndex][pairs[i]].reward0 = receiveAmounts[pairs[i]][pairs[i].token0()];\\n                rewardInfos[luckyInfoIndex][pairs[i]].reward1 = receiveAmounts[pairs[i]][pairs[i].token1()];\\n                emit LuckyPoolRewardInfo(luckyInfoIndex, pairs[i], rewardInfos[luckyInfoIndex][pairs[i]].avaliableUserNum, rewardInfos[luckyInfoIndex][pairs[i]].reward0, rewardInfos[luckyInfoIndex][pairs[i]].reward1);\\n            }\\n            if (!luckyPairs[luckyInfoIndex][pairs[i]]) {\\n                luckyPairs[luckyInfoIndex][pairs[i]] = true;\\n                luckyInfos[luckyInfoIndex].luckyPairsNum ++;\\n            }\\n        }\\n        if (luckyInfo.countAt == 0) {\\n            luckyInfos[luckyInfoIndex].countAt = block.timestamp;\\n            luckyInfos[luckyInfoIndex].openAt = block.timestamp + OPEN_WAIT; //1 hour later\\n            luckyInfos[luckyInfoIndex].finishAt = block.timestamp + CLAIM_WAIT; //72 hour later\\n            emit LuckyPoolOpen(luckyInfoIndex, luckyInfos[luckyInfoIndex].countAt, luckyInfos[luckyInfoIndex].openAt, luckyInfos[luckyInfoIndex].finishAt);\\n            beginLuckyPool();\\n        }\\n    }\\n\\n    function rewardPoolId() public view returns (uint256) {\\n        uint256 luckyInfoIndex = uint256(-1);\\n        if (luckyInfos.length > 0) {\\n            LuckyInfo storage luckyInfo = luckyInfos[luckyInfos.length - 1];\\n            if (luckyInfos.length > 1 && luckyInfo.countAt == 0) {\\n                luckyInfo = luckyInfos[luckyInfos.length - 2];\\n                luckyInfoIndex = luckyInfos.length - 2;\\n            } else {\\n                luckyInfoIndex = luckyInfos.length - 1;\\n            }\\n            if (luckyInfo.openAt != 0 && luckyInfo.openAt <= block.timestamp && luckyInfo.finishAt >= block.timestamp) {\\n                return luckyInfoIndex;\\n            }\\n        }\\n        return uint256(-1);\\n    }\\n\\n    function currentPoolId() public view returns (uint256) {\\n        return luckyInfos.length - 1;\\n    }\\n\\n    IRandom public random;\\n\\n    constructor(IRandom _random) {\\n        random = _random;\\n        beginLuckyPool();\\n    }\\n\\n    function setRandom(IRandom _random) external onlyOwner {\\n        random = _random;\\n    }\\n\\n    function claim(IKeplerPair pair, string memory r) external {\\n        require(!address(msg.sender).isContract(), \\\"contract can not claim\\\");\\n        uint256 currentRewardPoolId = rewardPoolId();\\n        LuckyInfo storage luckyInfo = luckyInfos[currentRewardPoolId];\\n        RewardInfo storage rewardInfo = rewardInfos[currentRewardPoolId][pair];\\n        require(block.timestamp >= luckyInfo.openAt && block.timestamp <= luckyInfo.finishAt, \\\"not the right time\\\");\\n        require(avaliableUsers[currentRewardPoolId][pair][msg.sender], \\\"do not have the right\\\");\\n        require(!openUsers[currentRewardPoolId][pair][msg.sender], \\\"already opened\\\");\\n        bool luckyOne = false;\\n        if (rewardInfo.avaliableUserNum - rewardInfo.openUserNum <= TOTAL_WINER_NUM - rewardInfo.luckyUserNum) {\\n            luckyOne = true;\\n        } else if (rewardInfo.luckyUserNum >= TOTAL_WINER_NUM) {\\n            luckyOne = false;\\n        } else {\\n            uint num = random.win(r, 5);\\n            console.log(\\\"test123\\\", num);\\n            luckyOne = num == 1;\\n        }\\n        openUsers[currentRewardPoolId][pair][msg.sender] = true;\\n        rewardInfo.openUserNum ++;\\n        if (!luckyOne) {\\n            emit LuckyPoolClaim(currentRewardPoolId, msg.sender, pair, luckyOne, false, 0, 0);\\n            return;\\n        }\\n        rewardInfo.luckyUserNum ++;\\n        bool isBestUser = false;\\n        if (rewardInfo.bestUser == address(0) && rewardInfo.luckyUserNum > 2) {\\n            isBestUser = true;\\n        }\\n        uint reward0 = 0;\\n        uint reward1 = 0;\\n        if (isBestUser) {\\n            reward0 = rewardInfo.reward0.div(2);\\n            reward1 = rewardInfo.reward1.div(2);\\n            rewardInfo.bestUser = msg.sender;\\n        } else {\\n            reward0 = rewardInfo.reward0.div(2).div(WINER_NUM);\\n            reward1 = rewardInfo.reward1.div(2).div(WINER_NUM);\\n        }\\n        luckyUsers0[currentRewardPoolId][pair][msg.sender] = reward0;\\n        luckyUsers1[currentRewardPoolId][pair][msg.sender] = reward1;\\n        if (reward0 > 0) {\\n            SafeERC20.safeTransfer(IERC20(pair.token0()), msg.sender, reward0);\\n            receiveAmounts[pair][pair.token0()] -= reward0;\\n        }\\n        if (reward1 > 0) {\\n            SafeERC20.safeTransfer(IERC20(pair.token1()), msg.sender, reward1);\\n            receiveAmounts[pair][pair.token1()] -= reward1;\\n        }\\n        emit LuckyPoolClaim(currentRewardPoolId, msg.sender, pair, luckyOne, isBestUser, reward0, reward1);\\n    }\\n    \\n}\\n\",\"keccak256\":\"0xbe92f2743cc698f7ee9df78c7ea4b1a602faa3028a40d3d90cf764b2fc49495c\",\"license\":\"MIT\"},\"contracts/interfaces/IKeplerPair.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity >=0.7.2;\\n\\ninterface IKeplerPair {\\n    event Approval(address indexed owner, address indexed spender, uint value);\\n    event Transfer(address indexed from, address indexed to, uint value);\\n\\n    function name() external pure returns (string memory);\\n    function symbol() external pure returns (string memory);\\n    function decimals() external pure returns (uint8);\\n    function totalSupply() external view returns (uint);\\n    function balanceOf(address owner) external view returns (uint);\\n    function allowance(address owner, address spender) external view returns (uint);\\n\\n    function approve(address spender, uint value) external returns (bool);\\n    function transfer(address to, uint value) external returns (bool);\\n    function transferFrom(address from, address to, uint value) external returns (bool);\\n\\n    function DOMAIN_SEPARATOR() external view returns (bytes32);\\n    function PERMIT_TYPEHASH() external pure returns (bytes32);\\n    function nonces(address owner) external view returns (uint);\\n\\n    function permit(address owner, address spender, uint value, uint deadline, uint8 v, bytes32 r, bytes32 s) external;\\n\\n    event Mint(address indexed sender, uint amount0, uint amount1);\\n    event Burn(address indexed sender, uint amount0, uint amount1, address indexed to);\\n    event Swap(\\n        address indexed sender,\\n        uint amount0In,\\n        uint amount1In,\\n        uint amount0Out,\\n        uint amount1Out,\\n        address indexed to\\n    );\\n    event Sync(uint112 reserve0, uint112 reserve1);\\n\\n    function MINIMUM_LIQUIDITY() external pure returns (uint);\\n    function factory() external view returns (address);\\n    function token0() external view returns (address);\\n    function token1() external view returns (address);\\n    function getReserves() external view returns (uint112 reserve0, uint112 reserve1, uint32 blockTimestampLast);\\n    function price0CumulativeLast() external view returns (uint);\\n    function price1CumulativeLast() external view returns (uint);\\n    function kLast() external view returns (uint);\\n\\n    function mint(address to) external returns (uint liquidity);\\n    function burn(address to) external returns (uint amount0, uint amount1);\\n    function swap(uint amount0Out, uint amount1Out, address to) external;\\n    function skim(address to) external;\\n    function sync() external;\\n\\n    function initialize(address, address) external;\\n}\\n\",\"keccak256\":\"0x431055bf9132690a9d5db0308634f2dd75bbcb0c8e78bc7e6bf815388d78bccc\",\"license\":\"MIT\"},\"contracts/interfaces/IRandom.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity >=0.7.2;\\n\\ninterface IRandom {\\n\\n    function win(string memory r, uint256 maxNum) external returns (uint256);\\n\\n}\\n\",\"keccak256\":\"0x3f988257f19316f6f4e353ff074f529527f6b74c09883214f119508f0ed0d0d1\",\"license\":\"MIT\"},\"contracts/interfaces/IUser.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity >=0.7.2;\\n\\ninterface IUser {\\n\\n    function inviter(address user) external view returns (address);\\n\\n    function inviteNume(address user) external view returns (uint256);\\n\\n    function userNum() external view returns (uint256);\\n\\n    function registe(address _inviter) external;\\n\\n    function userExists(address user) external view returns (bool);\\n}\\n\",\"keccak256\":\"0x00192282a7af750d948b41e0e1782901ec105184a853bbb8c5d0585244fadb88\",\"license\":\"MIT\"},\"hardhat/console.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity >= 0.4.22 <0.9.0;\\n\\nlibrary console {\\n\\taddress constant CONSOLE_ADDRESS = address(0x000000000000000000636F6e736F6c652e6c6f67);\\n\\n\\tfunction _sendLogPayload(bytes memory payload) private view {\\n\\t\\tuint256 payloadLength = payload.length;\\n\\t\\taddress consoleAddress = CONSOLE_ADDRESS;\\n\\t\\tassembly {\\n\\t\\t\\tlet payloadStart := add(payload, 32)\\n\\t\\t\\tlet r := staticcall(gas(), consoleAddress, payloadStart, payloadLength, 0, 0)\\n\\t\\t}\\n\\t}\\n\\n\\tfunction log() internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log()\\\"));\\n\\t}\\n\\n\\tfunction logInt(int p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(int)\\\", p0));\\n\\t}\\n\\n\\tfunction logUint(uint p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint)\\\", p0));\\n\\t}\\n\\n\\tfunction logString(string memory p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string)\\\", p0));\\n\\t}\\n\\n\\tfunction logBool(bool p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool)\\\", p0));\\n\\t}\\n\\n\\tfunction logAddress(address p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes(bytes memory p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes1(bytes1 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes1)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes2(bytes2 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes2)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes3(bytes3 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes3)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes4(bytes4 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes4)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes5(bytes5 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes5)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes6(bytes6 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes6)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes7(bytes7 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes7)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes8(bytes8 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes8)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes9(bytes9 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes9)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes10(bytes10 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes10)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes11(bytes11 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes11)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes12(bytes12 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes12)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes13(bytes13 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes13)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes14(bytes14 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes14)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes15(bytes15 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes15)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes16(bytes16 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes16)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes17(bytes17 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes17)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes18(bytes18 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes18)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes19(bytes19 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes19)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes20(bytes20 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes20)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes21(bytes21 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes21)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes22(bytes22 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes22)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes23(bytes23 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes23)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes24(bytes24 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes24)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes25(bytes25 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes25)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes26(bytes26 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes26)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes27(bytes27 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes27)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes28(bytes28 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes28)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes29(bytes29 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes29)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes30(bytes30 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes30)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes31(bytes31 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes31)\\\", p0));\\n\\t}\\n\\n\\tfunction logBytes32(bytes32 p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bytes32)\\\", p0));\\n\\t}\\n\\n\\tfunction log(uint p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint)\\\", p0));\\n\\t}\\n\\n\\tfunction log(string memory p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string)\\\", p0));\\n\\t}\\n\\n\\tfunction log(bool p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool)\\\", p0));\\n\\t}\\n\\n\\tfunction log(address p0) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address)\\\", p0));\\n\\t}\\n\\n\\tfunction log(uint p0, uint p1) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,uint)\\\", p0, p1));\\n\\t}\\n\\n\\tfunction log(uint p0, string memory p1) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,string)\\\", p0, p1));\\n\\t}\\n\\n\\tfunction log(uint p0, bool p1) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,bool)\\\", p0, p1));\\n\\t}\\n\\n\\tfunction log(uint p0, address p1) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,address)\\\", p0, p1));\\n\\t}\\n\\n\\tfunction log(string memory p0, uint p1) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,uint)\\\", p0, p1));\\n\\t}\\n\\n\\tfunction log(string memory p0, string memory p1) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,string)\\\", p0, p1));\\n\\t}\\n\\n\\tfunction log(string memory p0, bool p1) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,bool)\\\", p0, p1));\\n\\t}\\n\\n\\tfunction log(string memory p0, address p1) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,address)\\\", p0, p1));\\n\\t}\\n\\n\\tfunction log(bool p0, uint p1) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,uint)\\\", p0, p1));\\n\\t}\\n\\n\\tfunction log(bool p0, string memory p1) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,string)\\\", p0, p1));\\n\\t}\\n\\n\\tfunction log(bool p0, bool p1) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,bool)\\\", p0, p1));\\n\\t}\\n\\n\\tfunction log(bool p0, address p1) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,address)\\\", p0, p1));\\n\\t}\\n\\n\\tfunction log(address p0, uint p1) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,uint)\\\", p0, p1));\\n\\t}\\n\\n\\tfunction log(address p0, string memory p1) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,string)\\\", p0, p1));\\n\\t}\\n\\n\\tfunction log(address p0, bool p1) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,bool)\\\", p0, p1));\\n\\t}\\n\\n\\tfunction log(address p0, address p1) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,address)\\\", p0, p1));\\n\\t}\\n\\n\\tfunction log(uint p0, uint p1, uint p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,uint,uint)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(uint p0, uint p1, string memory p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,uint,string)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(uint p0, uint p1, bool p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,uint,bool)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(uint p0, uint p1, address p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,uint,address)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(uint p0, string memory p1, uint p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,string,uint)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(uint p0, string memory p1, string memory p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,string,string)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(uint p0, string memory p1, bool p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,string,bool)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(uint p0, string memory p1, address p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,string,address)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(uint p0, bool p1, uint p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,bool,uint)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(uint p0, bool p1, string memory p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,bool,string)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(uint p0, bool p1, bool p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,bool,bool)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(uint p0, bool p1, address p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,bool,address)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(uint p0, address p1, uint p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,address,uint)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(uint p0, address p1, string memory p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,address,string)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(uint p0, address p1, bool p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,address,bool)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(uint p0, address p1, address p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,address,address)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(string memory p0, uint p1, uint p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,uint,uint)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(string memory p0, uint p1, string memory p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,uint,string)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(string memory p0, uint p1, bool p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,uint,bool)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(string memory p0, uint p1, address p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,uint,address)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(string memory p0, string memory p1, uint p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,string,uint)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(string memory p0, string memory p1, string memory p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,string,string)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(string memory p0, string memory p1, bool p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,string,bool)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(string memory p0, string memory p1, address p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,string,address)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(string memory p0, bool p1, uint p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,bool,uint)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(string memory p0, bool p1, string memory p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,bool,string)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(string memory p0, bool p1, bool p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,bool,bool)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(string memory p0, bool p1, address p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,bool,address)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(string memory p0, address p1, uint p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,address,uint)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(string memory p0, address p1, string memory p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,address,string)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(string memory p0, address p1, bool p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,address,bool)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(string memory p0, address p1, address p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,address,address)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(bool p0, uint p1, uint p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,uint,uint)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(bool p0, uint p1, string memory p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,uint,string)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(bool p0, uint p1, bool p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,uint,bool)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(bool p0, uint p1, address p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,uint,address)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(bool p0, string memory p1, uint p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,string,uint)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(bool p0, string memory p1, string memory p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,string,string)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(bool p0, string memory p1, bool p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,string,bool)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(bool p0, string memory p1, address p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,string,address)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(bool p0, bool p1, uint p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,bool,uint)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(bool p0, bool p1, string memory p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,bool,string)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(bool p0, bool p1, bool p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,bool,bool)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(bool p0, bool p1, address p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,bool,address)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(bool p0, address p1, uint p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,address,uint)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(bool p0, address p1, string memory p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,address,string)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(bool p0, address p1, bool p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,address,bool)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(bool p0, address p1, address p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,address,address)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(address p0, uint p1, uint p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,uint,uint)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(address p0, uint p1, string memory p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,uint,string)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(address p0, uint p1, bool p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,uint,bool)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(address p0, uint p1, address p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,uint,address)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(address p0, string memory p1, uint p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,string,uint)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(address p0, string memory p1, string memory p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,string,string)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(address p0, string memory p1, bool p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,string,bool)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(address p0, string memory p1, address p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,string,address)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(address p0, bool p1, uint p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,bool,uint)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(address p0, bool p1, string memory p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,bool,string)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(address p0, bool p1, bool p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,bool,bool)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(address p0, bool p1, address p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,bool,address)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(address p0, address p1, uint p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,address,uint)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(address p0, address p1, string memory p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,address,string)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(address p0, address p1, bool p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,address,bool)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(address p0, address p1, address p2) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,address,address)\\\", p0, p1, p2));\\n\\t}\\n\\n\\tfunction log(uint p0, uint p1, uint p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,uint,uint,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, uint p1, uint p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,uint,uint,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, uint p1, uint p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,uint,uint,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, uint p1, uint p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,uint,uint,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, uint p1, string memory p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,uint,string,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, uint p1, string memory p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,uint,string,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, uint p1, string memory p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,uint,string,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, uint p1, string memory p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,uint,string,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, uint p1, bool p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,uint,bool,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, uint p1, bool p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,uint,bool,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, uint p1, bool p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,uint,bool,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, uint p1, bool p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,uint,bool,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, uint p1, address p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,uint,address,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, uint p1, address p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,uint,address,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, uint p1, address p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,uint,address,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, uint p1, address p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,uint,address,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, string memory p1, uint p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,string,uint,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, string memory p1, uint p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,string,uint,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, string memory p1, uint p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,string,uint,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, string memory p1, uint p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,string,uint,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, string memory p1, string memory p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,string,string,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, string memory p1, string memory p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,string,string,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, string memory p1, string memory p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,string,string,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, string memory p1, string memory p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,string,string,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, string memory p1, bool p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,string,bool,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, string memory p1, bool p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,string,bool,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, string memory p1, bool p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,string,bool,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, string memory p1, bool p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,string,bool,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, string memory p1, address p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,string,address,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, string memory p1, address p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,string,address,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, string memory p1, address p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,string,address,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, string memory p1, address p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,string,address,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, bool p1, uint p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,bool,uint,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, bool p1, uint p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,bool,uint,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, bool p1, uint p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,bool,uint,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, bool p1, uint p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,bool,uint,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, bool p1, string memory p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,bool,string,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, bool p1, string memory p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,bool,string,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, bool p1, string memory p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,bool,string,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, bool p1, string memory p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,bool,string,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, bool p1, bool p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,bool,bool,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, bool p1, bool p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,bool,bool,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, bool p1, bool p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,bool,bool,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, bool p1, bool p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,bool,bool,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, bool p1, address p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,bool,address,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, bool p1, address p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,bool,address,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, bool p1, address p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,bool,address,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, bool p1, address p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,bool,address,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, address p1, uint p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,address,uint,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, address p1, uint p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,address,uint,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, address p1, uint p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,address,uint,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, address p1, uint p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,address,uint,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, address p1, string memory p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,address,string,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, address p1, string memory p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,address,string,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, address p1, string memory p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,address,string,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, address p1, string memory p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,address,string,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, address p1, bool p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,address,bool,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, address p1, bool p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,address,bool,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, address p1, bool p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,address,bool,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, address p1, bool p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,address,bool,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, address p1, address p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,address,address,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, address p1, address p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,address,address,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, address p1, address p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,address,address,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(uint p0, address p1, address p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(uint,address,address,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, uint p1, uint p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,uint,uint,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, uint p1, uint p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,uint,uint,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, uint p1, uint p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,uint,uint,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, uint p1, uint p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,uint,uint,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, uint p1, string memory p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,uint,string,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, uint p1, string memory p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,uint,string,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, uint p1, string memory p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,uint,string,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, uint p1, string memory p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,uint,string,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, uint p1, bool p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,uint,bool,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, uint p1, bool p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,uint,bool,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, uint p1, bool p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,uint,bool,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, uint p1, bool p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,uint,bool,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, uint p1, address p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,uint,address,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, uint p1, address p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,uint,address,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, uint p1, address p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,uint,address,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, uint p1, address p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,uint,address,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, string memory p1, uint p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,string,uint,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, string memory p1, uint p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,string,uint,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, string memory p1, uint p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,string,uint,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, string memory p1, uint p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,string,uint,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, string memory p1, string memory p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,string,string,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, string memory p1, string memory p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,string,string,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, string memory p1, string memory p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,string,string,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, string memory p1, string memory p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,string,string,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, string memory p1, bool p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,string,bool,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, string memory p1, bool p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,string,bool,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, string memory p1, bool p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,string,bool,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, string memory p1, bool p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,string,bool,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, string memory p1, address p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,string,address,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, string memory p1, address p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,string,address,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, string memory p1, address p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,string,address,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, string memory p1, address p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,string,address,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, bool p1, uint p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,bool,uint,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, bool p1, uint p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,bool,uint,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, bool p1, uint p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,bool,uint,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, bool p1, uint p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,bool,uint,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, bool p1, string memory p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,bool,string,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, bool p1, string memory p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,bool,string,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, bool p1, string memory p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,bool,string,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, bool p1, string memory p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,bool,string,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, bool p1, bool p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,bool,bool,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, bool p1, bool p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,bool,bool,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, bool p1, bool p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,bool,bool,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, bool p1, bool p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,bool,bool,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, bool p1, address p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,bool,address,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, bool p1, address p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,bool,address,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, bool p1, address p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,bool,address,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, bool p1, address p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,bool,address,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, address p1, uint p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,address,uint,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, address p1, uint p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,address,uint,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, address p1, uint p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,address,uint,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, address p1, uint p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,address,uint,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, address p1, string memory p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,address,string,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, address p1, string memory p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,address,string,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, address p1, string memory p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,address,string,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, address p1, string memory p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,address,string,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, address p1, bool p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,address,bool,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, address p1, bool p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,address,bool,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, address p1, bool p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,address,bool,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, address p1, bool p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,address,bool,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, address p1, address p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,address,address,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, address p1, address p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,address,address,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, address p1, address p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,address,address,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(string memory p0, address p1, address p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(string,address,address,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, uint p1, uint p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,uint,uint,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, uint p1, uint p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,uint,uint,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, uint p1, uint p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,uint,uint,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, uint p1, uint p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,uint,uint,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, uint p1, string memory p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,uint,string,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, uint p1, string memory p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,uint,string,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, uint p1, string memory p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,uint,string,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, uint p1, string memory p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,uint,string,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, uint p1, bool p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,uint,bool,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, uint p1, bool p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,uint,bool,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, uint p1, bool p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,uint,bool,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, uint p1, bool p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,uint,bool,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, uint p1, address p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,uint,address,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, uint p1, address p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,uint,address,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, uint p1, address p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,uint,address,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, uint p1, address p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,uint,address,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, string memory p1, uint p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,string,uint,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, string memory p1, uint p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,string,uint,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, string memory p1, uint p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,string,uint,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, string memory p1, uint p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,string,uint,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, string memory p1, string memory p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,string,string,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, string memory p1, string memory p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,string,string,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, string memory p1, string memory p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,string,string,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, string memory p1, string memory p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,string,string,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, string memory p1, bool p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,string,bool,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, string memory p1, bool p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,string,bool,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, string memory p1, bool p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,string,bool,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, string memory p1, bool p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,string,bool,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, string memory p1, address p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,string,address,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, string memory p1, address p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,string,address,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, string memory p1, address p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,string,address,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, string memory p1, address p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,string,address,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, bool p1, uint p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,bool,uint,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, bool p1, uint p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,bool,uint,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, bool p1, uint p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,bool,uint,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, bool p1, uint p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,bool,uint,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, bool p1, string memory p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,bool,string,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, bool p1, string memory p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,bool,string,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, bool p1, string memory p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,bool,string,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, bool p1, string memory p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,bool,string,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, bool p1, bool p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,bool,bool,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, bool p1, bool p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,bool,bool,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, bool p1, bool p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,bool,bool,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, bool p1, bool p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,bool,bool,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, bool p1, address p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,bool,address,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, bool p1, address p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,bool,address,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, bool p1, address p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,bool,address,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, bool p1, address p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,bool,address,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, address p1, uint p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,address,uint,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, address p1, uint p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,address,uint,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, address p1, uint p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,address,uint,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, address p1, uint p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,address,uint,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, address p1, string memory p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,address,string,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, address p1, string memory p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,address,string,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, address p1, string memory p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,address,string,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, address p1, string memory p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,address,string,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, address p1, bool p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,address,bool,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, address p1, bool p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,address,bool,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, address p1, bool p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,address,bool,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, address p1, bool p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,address,bool,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, address p1, address p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,address,address,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, address p1, address p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,address,address,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, address p1, address p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,address,address,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(bool p0, address p1, address p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(bool,address,address,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, uint p1, uint p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,uint,uint,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, uint p1, uint p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,uint,uint,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, uint p1, uint p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,uint,uint,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, uint p1, uint p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,uint,uint,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, uint p1, string memory p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,uint,string,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, uint p1, string memory p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,uint,string,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, uint p1, string memory p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,uint,string,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, uint p1, string memory p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,uint,string,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, uint p1, bool p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,uint,bool,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, uint p1, bool p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,uint,bool,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, uint p1, bool p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,uint,bool,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, uint p1, bool p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,uint,bool,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, uint p1, address p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,uint,address,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, uint p1, address p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,uint,address,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, uint p1, address p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,uint,address,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, uint p1, address p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,uint,address,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, string memory p1, uint p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,string,uint,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, string memory p1, uint p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,string,uint,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, string memory p1, uint p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,string,uint,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, string memory p1, uint p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,string,uint,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, string memory p1, string memory p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,string,string,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, string memory p1, string memory p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,string,string,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, string memory p1, string memory p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,string,string,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, string memory p1, string memory p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,string,string,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, string memory p1, bool p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,string,bool,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, string memory p1, bool p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,string,bool,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, string memory p1, bool p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,string,bool,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, string memory p1, bool p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,string,bool,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, string memory p1, address p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,string,address,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, string memory p1, address p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,string,address,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, string memory p1, address p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,string,address,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, string memory p1, address p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,string,address,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, bool p1, uint p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,bool,uint,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, bool p1, uint p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,bool,uint,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, bool p1, uint p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,bool,uint,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, bool p1, uint p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,bool,uint,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, bool p1, string memory p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,bool,string,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, bool p1, string memory p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,bool,string,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, bool p1, string memory p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,bool,string,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, bool p1, string memory p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,bool,string,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, bool p1, bool p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,bool,bool,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, bool p1, bool p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,bool,bool,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, bool p1, bool p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,bool,bool,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, bool p1, bool p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,bool,bool,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, bool p1, address p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,bool,address,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, bool p1, address p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,bool,address,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, bool p1, address p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,bool,address,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, bool p1, address p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,bool,address,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, address p1, uint p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,address,uint,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, address p1, uint p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,address,uint,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, address p1, uint p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,address,uint,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, address p1, uint p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,address,uint,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, address p1, string memory p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,address,string,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, address p1, string memory p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,address,string,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, address p1, string memory p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,address,string,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, address p1, string memory p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,address,string,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, address p1, bool p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,address,bool,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, address p1, bool p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,address,bool,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, address p1, bool p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,address,bool,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, address p1, bool p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,address,bool,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, address p1, address p2, uint p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,address,address,uint)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, address p1, address p2, string memory p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,address,address,string)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, address p1, address p2, bool p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,address,address,bool)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n\\tfunction log(address p0, address p1, address p2, address p3) internal view {\\n\\t\\t_sendLogPayload(abi.encodeWithSignature(\\\"log(address,address,address,address)\\\", p0, p1, p2, p3));\\n\\t}\\n\\n}\\n\",\"keccak256\":\"0x72b6a1d297cd3b033d7c2e4a7e7864934bb767db6453623f1c3082c6534547f4\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x60806040523480156200001157600080fd5b50604051620027e3380380620027e3833981810160405260208110156200003757600080fd5b5051600062000045620000bb565b600080546001600160a01b0319166001600160a01b0383169081178255604051929350917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908290a350600980546001600160a01b0319166001600160a01b038316179055620000b4620000bf565b50620002cf565b3390565b620000c9620000bb565b6001600160a01b0316620000dc620002c0565b6001600160a01b03161462000138576040805162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572604482015290519081900360640190fd5b600254156200017f57600280546000919060001981019081106200015857fe5b906000526020600020906005020190508060010154600014156200017d5750620002be565b505b6040805160a08101825242808252600060208084018281528486018381526060860184815260808701858152600280546001810182559681905297517f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5ace60059097029687015592517f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5acf86015590517f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5ad0850155517f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5ad1840155517f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5ad290920191909155915483516000199190910181529182015281517ff54544980c2cb53c7f24ba0544d0e589b21cfd823d23bb10dee28b6814b20b5c929181900390910190a15b565b6000546001600160a01b031690565b61250480620002df6000396000f3fe608060405234801561001057600080fd5b50600436106101585760003560e01c8063a58ed781116100c3578063ebc5163b1161007c578063ebc5163b14610482578063ed3417911461048a578063ef4d76881461024f578063f2fde38b14610492578063f6d2f148146104b8578063fae03fff146105c657610158565b8063a58ed781146102d1578063a8d95fb214610338578063ca9c0bad146103ec578063caab33ea14610412578063e814b1a714610446578063e83950681461047a57610158565b8063803f84df11610115578063803f84df14610247578063823eb50e1461024f57806388fee43b146102575780638da5cb5b1461028d57806396205de6146102955780639d1a48301461029d57610158565b806334d3b3451461015d5780635ec01e4d146101a55780636a0b4d0b146101c9578063715018a6146101d357806374010516146101db578063758496da1461021b575b600080fd5b6101916004803603606081101561017357600080fd5b508035906001600160a01b036020820135811691604001351661060e565b604080519115158252519081900360200190f35b6101ad610634565b604080516001600160a01b039092168252519081900360200190f35b6101d1610643565b005b6101d1610829565b610209600480360360408110156101f157600080fd5b506001600160a01b03813581169160200135166108d5565b60408051918252519081900360200190f35b6101916004803603604081101561023157600080fd5b50803590602001356001600160a01b03166108f2565b610209610912565b610209610917565b6101d16004803603606081101561026d57600080fd5b506001600160a01b0381358116916020810135909116906040013561091c565b6101ad61095a565b61020961096a565b610191600480360360608110156102b357600080fd5b508035906001600160a01b0360208201358116916040013516610a35565b6102fd600480360360408110156102e757600080fd5b50803590602001356001600160a01b0316610a5b565b6040805196875260208701959095526001600160a01b03909316858501526060850191909152608084015260a0830152519081900360c00190f35b6101d16004803603604081101561034e57600080fd5b6001600160a01b038235169190810190604081016020820135600160201b81111561037857600080fd5b82018360208201111561038a57600080fd5b803590602001918460018302840111600160201b831117156103ab57600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600092019190915250929550610aa2945050505050565b6101d16004803603602081101561040257600080fd5b50356001600160a01b0316611250565b6102096004803603606081101561042857600080fd5b508035906001600160a01b03602082013581169160400135166112d4565b6102096004803603606081101561045c57600080fd5b508035906001600160a01b03602082013581169160400135166112f7565b61020961131a565b61020961131f565b610209611329565b6101d1600480360360208110156104a857600080fd5b50356001600160a01b031661132f565b6101d1600480360360608110156104ce57600080fd5b810190602081018135600160201b8111156104e857600080fd5b8201836020820111156104fa57600080fd5b803590602001918460208302840111600160201b8311171561051b57600080fd5b919390929091602081019035600160201b81111561053857600080fd5b82018360208201111561054a57600080fd5b803590602001918460208302840111600160201b8311171561056b57600080fd5b919390929091602081019035600160201b81111561058857600080fd5b82018360208201111561059a57600080fd5b803590602001918460208302840111600160201b831117156105bb57600080fd5b509092509050611431565b6105e3600480360360208110156105dc57600080fd5b5035611f08565b6040805195865260208601949094528484019290925260608401526080830152519081900360a00190f35b600560209081526000938452604080852082529284528284209052825290205460ff1681565b6009546001600160a01b031681565b61064b611f49565b6001600160a01b031661065c61095a565b6001600160a01b0316146106a5576040805162461bcd60e51b81526020600482018190526024820152600080516020612485833981519152604482015290519081900360640190fd5b600254156106e857600280546000919060001981019081106106c357fe5b906000526020600020906005020190508060010154600014156106e65750610827565b505b6040805160a08101825242808252600060208084018281528486018381526060860184815260808701858152600280546001810182559681905297517f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5ace60059097029687015592517f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5acf86015590517f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5ad0850155517f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5ad1840155517f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5ad290920191909155915483516000199190910181529182015281517ff54544980c2cb53c7f24ba0544d0e589b21cfd823d23bb10dee28b6814b20b5c929181900390910190a15b565b610831611f49565b6001600160a01b031661084261095a565b6001600160a01b03161461088b576040805162461bcd60e51b81526020600482018190526024820152600080516020612485833981519152604482015290519081900360640190fd5b600080546040516001600160a01b03909116907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908390a3600080546001600160a01b0319169055565b600160209081526000928352604080842090915290825290205481565b600360209081526000928352604080842090915290825290205460ff1681565b603c81565b600181565b61092882333084611f4d565b6001600160a01b0392831660009081526001602090815260408083209490951682529290925291902080549091019055565b6000546001600160a01b03165b90565b6002546000906000199015610a2c576002805460009190600019810190811061098f57fe5b9060005260206000209060050201905060016002805490501180156109b657506001810154155b156109ec576002805460011981019081106109cd57fe5b90600052602060002090600502019050600280805490500391506109f6565b6002546000190191505b600281015415801590610a0d575042816002015411155b8015610a1d575042816003015410155b15610a2a57509050610967565b505b60001991505090565b600660209081526000938452604080852082529284528284209052825290205460ff1681565b60046020818152600093845260408085209091529183529120805460018201546002830154600384015494840154600590940154929491936001600160a01b039091169286565b610aab33611fad565b15610af6576040805162461bcd60e51b8152602060048201526016602482015275636f6e74726163742063616e206e6f7420636c61696d60501b604482015290519081900360640190fd5b6000610b0061096a565b9050600060028281548110610b1157fe5b600091825260208083208584526004825260408085206001600160a01b038a168652909252922060026005909202909201908101549092504210801590610b5c575081600301544211155b610ba2576040805162461bcd60e51b81526020600482015260126024820152716e6f74207468652072696768742074696d6560701b604482015290519081900360640190fd5b60008381526005602090815260408083206001600160a01b0389168452825280832033845290915290205460ff16610c19576040805162461bcd60e51b8152602060048201526015602482015274191bc81b9bdd081a185d99481d1a19481c9a59da1d605a1b604482015290519081900360640190fd5b60008381526006602090815260408083206001600160a01b0389168452825280832033845290915290205460ff1615610c8a576040805162461bcd60e51b815260206004820152600e60248201526d185b1c9958591e481bdc195b995960921b604482015290519081900360640190fd5b60038101546001820154825460009260020391900311610cac57506001610dd2565b6003820154600211610cc057506000610dd2565b600954604080516312b6680360e01b8152600560248201819052600482019283528851604483015288516000946001600160a01b0316936312b66803938b939282916064019060208601908083838c5b83811015610d28578181015183820152602001610d10565b50505050905090810190601f168015610d555780820380516001836020036101000a031916815260200191505b509350505050602060405180830381600087803b158015610d7557600080fd5b505af1158015610d89573d6000803e3d6000fd5b505050506040513d6020811015610d9f57600080fd5b50516040805180820190915260078152667465737431323360c81b6020820152909150610dcc9082611fb3565b60011490505b60008481526006602090815260408083206001600160a01b038a16845282528083203384529091529020805460ff191660019081179091558281018054909101905580610e8657604080518581523360208201526001600160a01b03881681830152821515606082015260006080820181905260a0820181905260c082015290517f902a1cdcb2a7b36dddcd624ec6d6ed136255bc56a5d4540cb75ac3f6898deb259181900360e00190a15050505061124c565b600382018054600101905560028201546000906001600160a01b0316158015610eb3575060028360030154115b15610ebc575060015b6000808215610f03576004850154610ed5906002612061565b6005860154909250610ee8906002612061565b6002860180546001600160a01b031916331790559050610f48565b610f266001610f206002886004015461206190919063ffffffff16565b90612061565b9150610f456001610f206002886005015461206190919063ffffffff16565b90505b60008781526007602090815260408083206001600160a01b038d16808552908352818420338086529084528285208790558b855260088452828520918552908352818420908452909152902081905581156110bb5761100c896001600160a01b0316630dfe16816040518163ffffffff1660e01b815260040160206040518083038186803b158015610fd957600080fd5b505afa158015610fed573d6000803e3d6000fd5b505050506040513d602081101561100357600080fd5b505133846120c8565b81600160008b6001600160a01b03166001600160a01b0316815260200190815260200160002060008b6001600160a01b0316630dfe16816040518163ffffffff1660e01b815260040160206040518083038186803b15801561106d57600080fd5b505afa158015611081573d6000803e3d6000fd5b505050506040513d602081101561109757600080fd5b50516001600160a01b03168152602081019190915260400160002080549190910390555b80156111df57611130896001600160a01b031663d21220a76040518163ffffffff1660e01b815260040160206040518083038186803b1580156110fd57600080fd5b505afa158015611111573d6000803e3d6000fd5b505050506040513d602081101561112757600080fd5b505133836120c8565b80600160008b6001600160a01b03166001600160a01b0316815260200190815260200160002060008b6001600160a01b031663d21220a76040518163ffffffff1660e01b815260040160206040518083038186803b15801561119157600080fd5b505afa1580156111a5573d6000803e3d6000fd5b505050506040513d60208110156111bb57600080fd5b50516001600160a01b03168152602081019190915260400160002080549190910390555b604080518881523360208201526001600160a01b038b16818301528515156060820152841515608082015260a0810184905260c0810183905290517f902a1cdcb2a7b36dddcd624ec6d6ed136255bc56a5d4540cb75ac3f6898deb259181900360e00190a1505050505050505b5050565b611258611f49565b6001600160a01b031661126961095a565b6001600160a01b0316146112b2576040805162461bcd60e51b81526020600482018190526024820152600080516020612485833981519152604482015290519081900360640190fd5b600980546001600160a01b0319166001600160a01b0392909216919091179055565b600860209081526000938452604080852082529284528284209052825290205481565b600760209081526000938452604080852082529284528284209052825290205481565b600281565b6002546000190190565b610e1081565b611337611f49565b6001600160a01b031661134861095a565b6001600160a01b031614611391576040805162461bcd60e51b81526020600482018190526024820152600080516020612485833981519152604482015290519081900360640190fd5b6001600160a01b0381166113d65760405162461bcd60e51b81526004018080602001828103825260268152602001806124396026913960400191505060405180910390fd5b600080546040516001600160a01b03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a3600080546001600160a01b0319166001600160a01b0392909216919091179055565b611439611f49565b6001600160a01b031661144a61095a565b6001600160a01b031614611493576040805162461bcd60e51b81526020600482018190526024820152600080516020612485833981519152604482015290519081900360640190fd5b61149b612409565b6002546000199015611675576002805460001981019081106114b957fe5b90600052602060002090600502016040518060a0016040529081600082015481526020016001820154815260200160028201548152602001600382015481526020016004820154815250509150600160028054905011801561151d57506020820151155b156115905760028054600119810190811061153457fe5b90600052602060002090600502016040518060a001604052908160008201548152602001600182015481526020016002820154815260200160038201548152602001600482015481525050915060028080549050039050611599565b50600254600019015b4282606001511161160f576002805460001981019081106115b657fe5b90600052602060002090600502016040518060a001604052908160008201548152602001600182015481526020016002820154815260200160038201548152602001600482015481525050915060016002805490500390505b60408201511580611624575042826040015110155b611675576040805162461bcd60e51b815260206004820152601760248201527f6c75636b7920706f6f6c20616c7265616479206f70656e000000000000000000604482015290519081900360640190fd5b6000198114156116c3576040805162461bcd60e51b8152602060048201526014602482015273363ab1b5bc903837b7b6103737ba103132b3b4b760611b604482015290519081900360640190fd5b84831461170a576040805162461bcd60e51b815260206004820152601060248201526f696c6c6567616c2070616972206e756d60801b604482015290519081900360640190fd5b6000805b86811015611dd2576000805b87878481811061172657fe5b9050602002013581101561187057838b1161177e576040805162461bcd60e51b81526020600482015260136024820152720d2d8d8cacec2d840eae6cae440d8cadccee8d606b1b604482015290519081900360640190fd5b60008c8c8681811061178c57fe5b905060200201356001600160a01b0316905084806001019550506005600087815260200190815260200160002060008c8c878181106117c757fe5b6001600160a01b0360209182029390930135831684528381019490945250604091820160009081209185168152925290205460ff166118675760008681526005602052604081206001918d8d8881811061181d57fe5b6001600160a01b036020918202939093013583168452838101949094525060409182016000908120918616815292529020805491151560ff19909216919091179055600192909201915b5060010161171a565b508015611cf857600084815260046020526040812082918b8b8681811061189357fe5b905060200201356001600160a01b03166001600160a01b03166001600160a01b0316815260200190815260200160002060000154016004600086815260200190815260200160002060008b8b868181106118e957fe5b905060200201356001600160a01b03166001600160a01b03166001600160a01b0316815260200190815260200160002060000181905550600160008a8a8581811061193057fe5b905060200201356001600160a01b03166001600160a01b03166001600160a01b0316815260200190815260200160002060008a8a8581811061196e57fe5b905060200201356001600160a01b03166001600160a01b0316630dfe16816040518163ffffffff1660e01b815260040160206040518083038186803b1580156119b657600080fd5b505afa1580156119ca573d6000803e3d6000fd5b505050506040513d60208110156119e057600080fd5b50516001600160a01b0316815260208181019290925260409081016000908120548782526004909352908120908b8b86818110611a1957fe5b905060200201356001600160a01b03166001600160a01b03166001600160a01b0316815260200190815260200160002060040181905550600160008a8a85818110611a6057fe5b905060200201356001600160a01b03166001600160a01b03166001600160a01b0316815260200190815260200160002060008a8a85818110611a9e57fe5b905060200201356001600160a01b03166001600160a01b031663d21220a76040518163ffffffff1660e01b815260040160206040518083038186803b158015611ae657600080fd5b505afa158015611afa573d6000803e3d6000fd5b505050506040513d6020811015611b1057600080fd5b50516001600160a01b0316815260208181019290925260409081016000908120548782526004909352908120908b8b86818110611b4957fe5b905060200201356001600160a01b03166001600160a01b03166001600160a01b03168152602001908152602001600020600501819055507f6346157cec3517277c4432f0cadd5827afec2f2ae099467171840826032c419a848a8a85818110611bae57fe5b905060200201356001600160a01b03166004600088815260200190815260200160002060008d8d88818110611bdf57fe5b905060200201356001600160a01b03166001600160a01b03166001600160a01b03168152602001908152602001600020600001546004600089815260200190815260200160002060008e8e89818110611c3457fe5b905060200201356001600160a01b03166001600160a01b03166001600160a01b0316815260200190815260200160002060040154600460008a815260200190815260200160002060008f8f8a818110611c8957fe5b905060200201356001600160a01b03166001600160a01b03166001600160a01b031681526020019081526020016000206005015460405180868152602001856001600160a01b031681526020018481526020018381526020018281526020019550505050505060405180910390a15b6000848152600360205260408120908a8a85818110611d1357fe5b602090810292909201356001600160a01b03168352508101919091526040016000205460ff16611dc95760008481526003602052604081206001918b8b86818110611d5a57fe5b905060200201356001600160a01b03166001600160a01b03166001600160a01b0316815260200190815260200160002060006101000a81548160ff02191690831515021790555060028481548110611dae57fe5b60009182526020909120600460059092020101805460010190555b5060010161170e565b506020830151611efd574260028381548110611dea57fe5b906000526020600020906005020160010181905550603c420160028381548110611e1057fe5b906000526020600020906005020160020181905550610e10420160028381548110611e3757fe5b9060005260206000209060050201600301819055507f8ad0597611df84f6f628e0d5d1a1c2252c12e77db97b081825a8bc9968bdf3c18260028481548110611e7b57fe5b90600052602060002090600502016001015460028581548110611e9a57fe5b90600052602060002090600502016002015460028681548110611eb957fe5b9060005260206000209060050201600301546040518085815260200184815260200183815260200182815260200194505050505060405180910390a1611efd610643565b505050505050505050565b60028181548110611f1857600080fd5b6000918252602090912060059091020180546001820154600283015460038401546004909401549294509092909185565b3390565b604080516001600160a01b0380861660248301528416604482015260648082018490528251808303909101815260849091019091526020810180516001600160e01b03166323b872dd60e01b179052611fa790859061211f565b50505050565b3b151590565b61124c82826040516024018080602001838152602001828103825284818151815260200191508051906020019080838360005b83811015611ffe578181015183820152602001611fe6565b50505050905090810190601f16801561202b5780820380516001836020036101000a031916815260200191505b5060408051601f198184030181529190526020810180516001600160e01b03166309710a9d60e41b17905293506121d092505050565b60008082116120b7576040805162461bcd60e51b815260206004820152601a60248201527f536166654d6174683a206469766973696f6e206279207a65726f000000000000604482015290519081900360640190fd5b8183816120c057fe5b049392505050565b604080516001600160a01b038416602482015260448082018490528251808303909101815260649091019091526020810180516001600160e01b031663a9059cbb60e01b17905261211a90849061211f565b505050565b6000612174826040518060400160405280602081526020017f5361666545524332303a206c6f772d6c6576656c2063616c6c206661696c6564815250856001600160a01b03166121f19092919063ffffffff16565b80519091501561211a5780806020019051602081101561219357600080fd5b505161211a5760405162461bcd60e51b815260040180806020018281038252602a8152602001806124a5602a913960400191505060405180910390fd5b80516a636f6e736f6c652e6c6f67602083016000808483855afa5050505050565b6060612200848460008561220a565b90505b9392505050565b60608247101561224b5760405162461bcd60e51b815260040180806020018281038252602681526020018061245f6026913960400191505060405180910390fd5b61225485611fad565b6122a5576040805162461bcd60e51b815260206004820152601d60248201527f416464726573733a2063616c6c20746f206e6f6e2d636f6e7472616374000000604482015290519081900360640190fd5b600080866001600160a01b031685876040518082805190602001908083835b602083106122e35780518252601f1990920191602091820191016122c4565b6001836020036101000a03801982511681845116808217855250505050505090500191505060006040518083038185875af1925050503d8060008114612345576040519150601f19603f3d011682016040523d82523d6000602084013e61234a565b606091505b509150915061235a828286612365565b979650505050505050565b60608315612374575081612203565b8251156123845782518084602001fd5b8160405162461bcd60e51b81526004018080602001828103825283818151815260200191508051906020019080838360005b838110156123ce5781810151838201526020016123b6565b50505050905090810190601f1680156123fb5780820380516001836020036101000a031916815260200191505b509250505060405180910390fd5b6040518060a001604052806000815260200160008152602001600081526020016000815260200160008152509056fe4f776e61626c653a206e6577206f776e657220697320746865207a65726f2061646472657373416464726573733a20696e73756666696369656e742062616c616e636520666f722063616c6c4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e65725361666545524332303a204552433230206f7065726174696f6e20646964206e6f742073756363656564a264697066735822122084b8206fc30eff7b5d30e1f2b0b2b041a1a6b1e8b6af27e3f45cc9786cb6a11564736f6c63430007060033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106101585760003560e01c8063a58ed781116100c3578063ebc5163b1161007c578063ebc5163b14610482578063ed3417911461048a578063ef4d76881461024f578063f2fde38b14610492578063f6d2f148146104b8578063fae03fff146105c657610158565b8063a58ed781146102d1578063a8d95fb214610338578063ca9c0bad146103ec578063caab33ea14610412578063e814b1a714610446578063e83950681461047a57610158565b8063803f84df11610115578063803f84df14610247578063823eb50e1461024f57806388fee43b146102575780638da5cb5b1461028d57806396205de6146102955780639d1a48301461029d57610158565b806334d3b3451461015d5780635ec01e4d146101a55780636a0b4d0b146101c9578063715018a6146101d357806374010516146101db578063758496da1461021b575b600080fd5b6101916004803603606081101561017357600080fd5b508035906001600160a01b036020820135811691604001351661060e565b604080519115158252519081900360200190f35b6101ad610634565b604080516001600160a01b039092168252519081900360200190f35b6101d1610643565b005b6101d1610829565b610209600480360360408110156101f157600080fd5b506001600160a01b03813581169160200135166108d5565b60408051918252519081900360200190f35b6101916004803603604081101561023157600080fd5b50803590602001356001600160a01b03166108f2565b610209610912565b610209610917565b6101d16004803603606081101561026d57600080fd5b506001600160a01b0381358116916020810135909116906040013561091c565b6101ad61095a565b61020961096a565b610191600480360360608110156102b357600080fd5b508035906001600160a01b0360208201358116916040013516610a35565b6102fd600480360360408110156102e757600080fd5b50803590602001356001600160a01b0316610a5b565b6040805196875260208701959095526001600160a01b03909316858501526060850191909152608084015260a0830152519081900360c00190f35b6101d16004803603604081101561034e57600080fd5b6001600160a01b038235169190810190604081016020820135600160201b81111561037857600080fd5b82018360208201111561038a57600080fd5b803590602001918460018302840111600160201b831117156103ab57600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600092019190915250929550610aa2945050505050565b6101d16004803603602081101561040257600080fd5b50356001600160a01b0316611250565b6102096004803603606081101561042857600080fd5b508035906001600160a01b03602082013581169160400135166112d4565b6102096004803603606081101561045c57600080fd5b508035906001600160a01b03602082013581169160400135166112f7565b61020961131a565b61020961131f565b610209611329565b6101d1600480360360208110156104a857600080fd5b50356001600160a01b031661132f565b6101d1600480360360608110156104ce57600080fd5b810190602081018135600160201b8111156104e857600080fd5b8201836020820111156104fa57600080fd5b803590602001918460208302840111600160201b8311171561051b57600080fd5b919390929091602081019035600160201b81111561053857600080fd5b82018360208201111561054a57600080fd5b803590602001918460208302840111600160201b8311171561056b57600080fd5b919390929091602081019035600160201b81111561058857600080fd5b82018360208201111561059a57600080fd5b803590602001918460208302840111600160201b831117156105bb57600080fd5b509092509050611431565b6105e3600480360360208110156105dc57600080fd5b5035611f08565b6040805195865260208601949094528484019290925260608401526080830152519081900360a00190f35b600560209081526000938452604080852082529284528284209052825290205460ff1681565b6009546001600160a01b031681565b61064b611f49565b6001600160a01b031661065c61095a565b6001600160a01b0316146106a5576040805162461bcd60e51b81526020600482018190526024820152600080516020612485833981519152604482015290519081900360640190fd5b600254156106e857600280546000919060001981019081106106c357fe5b906000526020600020906005020190508060010154600014156106e65750610827565b505b6040805160a08101825242808252600060208084018281528486018381526060860184815260808701858152600280546001810182559681905297517f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5ace60059097029687015592517f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5acf86015590517f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5ad0850155517f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5ad1840155517f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5ad290920191909155915483516000199190910181529182015281517ff54544980c2cb53c7f24ba0544d0e589b21cfd823d23bb10dee28b6814b20b5c929181900390910190a15b565b610831611f49565b6001600160a01b031661084261095a565b6001600160a01b03161461088b576040805162461bcd60e51b81526020600482018190526024820152600080516020612485833981519152604482015290519081900360640190fd5b600080546040516001600160a01b03909116907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908390a3600080546001600160a01b0319169055565b600160209081526000928352604080842090915290825290205481565b600360209081526000928352604080842090915290825290205460ff1681565b603c81565b600181565b61092882333084611f4d565b6001600160a01b0392831660009081526001602090815260408083209490951682529290925291902080549091019055565b6000546001600160a01b03165b90565b6002546000906000199015610a2c576002805460009190600019810190811061098f57fe5b9060005260206000209060050201905060016002805490501180156109b657506001810154155b156109ec576002805460011981019081106109cd57fe5b90600052602060002090600502019050600280805490500391506109f6565b6002546000190191505b600281015415801590610a0d575042816002015411155b8015610a1d575042816003015410155b15610a2a57509050610967565b505b60001991505090565b600660209081526000938452604080852082529284528284209052825290205460ff1681565b60046020818152600093845260408085209091529183529120805460018201546002830154600384015494840154600590940154929491936001600160a01b039091169286565b610aab33611fad565b15610af6576040805162461bcd60e51b8152602060048201526016602482015275636f6e74726163742063616e206e6f7420636c61696d60501b604482015290519081900360640190fd5b6000610b0061096a565b9050600060028281548110610b1157fe5b600091825260208083208584526004825260408085206001600160a01b038a168652909252922060026005909202909201908101549092504210801590610b5c575081600301544211155b610ba2576040805162461bcd60e51b81526020600482015260126024820152716e6f74207468652072696768742074696d6560701b604482015290519081900360640190fd5b60008381526005602090815260408083206001600160a01b0389168452825280832033845290915290205460ff16610c19576040805162461bcd60e51b8152602060048201526015602482015274191bc81b9bdd081a185d99481d1a19481c9a59da1d605a1b604482015290519081900360640190fd5b60008381526006602090815260408083206001600160a01b0389168452825280832033845290915290205460ff1615610c8a576040805162461bcd60e51b815260206004820152600e60248201526d185b1c9958591e481bdc195b995960921b604482015290519081900360640190fd5b60038101546001820154825460009260020391900311610cac57506001610dd2565b6003820154600211610cc057506000610dd2565b600954604080516312b6680360e01b8152600560248201819052600482019283528851604483015288516000946001600160a01b0316936312b66803938b939282916064019060208601908083838c5b83811015610d28578181015183820152602001610d10565b50505050905090810190601f168015610d555780820380516001836020036101000a031916815260200191505b509350505050602060405180830381600087803b158015610d7557600080fd5b505af1158015610d89573d6000803e3d6000fd5b505050506040513d6020811015610d9f57600080fd5b50516040805180820190915260078152667465737431323360c81b6020820152909150610dcc9082611fb3565b60011490505b60008481526006602090815260408083206001600160a01b038a16845282528083203384529091529020805460ff191660019081179091558281018054909101905580610e8657604080518581523360208201526001600160a01b03881681830152821515606082015260006080820181905260a0820181905260c082015290517f902a1cdcb2a7b36dddcd624ec6d6ed136255bc56a5d4540cb75ac3f6898deb259181900360e00190a15050505061124c565b600382018054600101905560028201546000906001600160a01b0316158015610eb3575060028360030154115b15610ebc575060015b6000808215610f03576004850154610ed5906002612061565b6005860154909250610ee8906002612061565b6002860180546001600160a01b031916331790559050610f48565b610f266001610f206002886004015461206190919063ffffffff16565b90612061565b9150610f456001610f206002886005015461206190919063ffffffff16565b90505b60008781526007602090815260408083206001600160a01b038d16808552908352818420338086529084528285208790558b855260088452828520918552908352818420908452909152902081905581156110bb5761100c896001600160a01b0316630dfe16816040518163ffffffff1660e01b815260040160206040518083038186803b158015610fd957600080fd5b505afa158015610fed573d6000803e3d6000fd5b505050506040513d602081101561100357600080fd5b505133846120c8565b81600160008b6001600160a01b03166001600160a01b0316815260200190815260200160002060008b6001600160a01b0316630dfe16816040518163ffffffff1660e01b815260040160206040518083038186803b15801561106d57600080fd5b505afa158015611081573d6000803e3d6000fd5b505050506040513d602081101561109757600080fd5b50516001600160a01b03168152602081019190915260400160002080549190910390555b80156111df57611130896001600160a01b031663d21220a76040518163ffffffff1660e01b815260040160206040518083038186803b1580156110fd57600080fd5b505afa158015611111573d6000803e3d6000fd5b505050506040513d602081101561112757600080fd5b505133836120c8565b80600160008b6001600160a01b03166001600160a01b0316815260200190815260200160002060008b6001600160a01b031663d21220a76040518163ffffffff1660e01b815260040160206040518083038186803b15801561119157600080fd5b505afa1580156111a5573d6000803e3d6000fd5b505050506040513d60208110156111bb57600080fd5b50516001600160a01b03168152602081019190915260400160002080549190910390555b604080518881523360208201526001600160a01b038b16818301528515156060820152841515608082015260a0810184905260c0810183905290517f902a1cdcb2a7b36dddcd624ec6d6ed136255bc56a5d4540cb75ac3f6898deb259181900360e00190a1505050505050505b5050565b611258611f49565b6001600160a01b031661126961095a565b6001600160a01b0316146112b2576040805162461bcd60e51b81526020600482018190526024820152600080516020612485833981519152604482015290519081900360640190fd5b600980546001600160a01b0319166001600160a01b0392909216919091179055565b600860209081526000938452604080852082529284528284209052825290205481565b600760209081526000938452604080852082529284528284209052825290205481565b600281565b6002546000190190565b610e1081565b611337611f49565b6001600160a01b031661134861095a565b6001600160a01b031614611391576040805162461bcd60e51b81526020600482018190526024820152600080516020612485833981519152604482015290519081900360640190fd5b6001600160a01b0381166113d65760405162461bcd60e51b81526004018080602001828103825260268152602001806124396026913960400191505060405180910390fd5b600080546040516001600160a01b03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a3600080546001600160a01b0319166001600160a01b0392909216919091179055565b611439611f49565b6001600160a01b031661144a61095a565b6001600160a01b031614611493576040805162461bcd60e51b81526020600482018190526024820152600080516020612485833981519152604482015290519081900360640190fd5b61149b612409565b6002546000199015611675576002805460001981019081106114b957fe5b90600052602060002090600502016040518060a0016040529081600082015481526020016001820154815260200160028201548152602001600382015481526020016004820154815250509150600160028054905011801561151d57506020820151155b156115905760028054600119810190811061153457fe5b90600052602060002090600502016040518060a001604052908160008201548152602001600182015481526020016002820154815260200160038201548152602001600482015481525050915060028080549050039050611599565b50600254600019015b4282606001511161160f576002805460001981019081106115b657fe5b90600052602060002090600502016040518060a001604052908160008201548152602001600182015481526020016002820154815260200160038201548152602001600482015481525050915060016002805490500390505b60408201511580611624575042826040015110155b611675576040805162461bcd60e51b815260206004820152601760248201527f6c75636b7920706f6f6c20616c7265616479206f70656e000000000000000000604482015290519081900360640190fd5b6000198114156116c3576040805162461bcd60e51b8152602060048201526014602482015273363ab1b5bc903837b7b6103737ba103132b3b4b760611b604482015290519081900360640190fd5b84831461170a576040805162461bcd60e51b815260206004820152601060248201526f696c6c6567616c2070616972206e756d60801b604482015290519081900360640190fd5b6000805b86811015611dd2576000805b87878481811061172657fe5b9050602002013581101561187057838b1161177e576040805162461bcd60e51b81526020600482015260136024820152720d2d8d8cacec2d840eae6cae440d8cadccee8d606b1b604482015290519081900360640190fd5b60008c8c8681811061178c57fe5b905060200201356001600160a01b0316905084806001019550506005600087815260200190815260200160002060008c8c878181106117c757fe5b6001600160a01b0360209182029390930135831684528381019490945250604091820160009081209185168152925290205460ff166118675760008681526005602052604081206001918d8d8881811061181d57fe5b6001600160a01b036020918202939093013583168452838101949094525060409182016000908120918616815292529020805491151560ff19909216919091179055600192909201915b5060010161171a565b508015611cf857600084815260046020526040812082918b8b8681811061189357fe5b905060200201356001600160a01b03166001600160a01b03166001600160a01b0316815260200190815260200160002060000154016004600086815260200190815260200160002060008b8b868181106118e957fe5b905060200201356001600160a01b03166001600160a01b03166001600160a01b0316815260200190815260200160002060000181905550600160008a8a8581811061193057fe5b905060200201356001600160a01b03166001600160a01b03166001600160a01b0316815260200190815260200160002060008a8a8581811061196e57fe5b905060200201356001600160a01b03166001600160a01b0316630dfe16816040518163ffffffff1660e01b815260040160206040518083038186803b1580156119b657600080fd5b505afa1580156119ca573d6000803e3d6000fd5b505050506040513d60208110156119e057600080fd5b50516001600160a01b0316815260208181019290925260409081016000908120548782526004909352908120908b8b86818110611a1957fe5b905060200201356001600160a01b03166001600160a01b03166001600160a01b0316815260200190815260200160002060040181905550600160008a8a85818110611a6057fe5b905060200201356001600160a01b03166001600160a01b03166001600160a01b0316815260200190815260200160002060008a8a85818110611a9e57fe5b905060200201356001600160a01b03166001600160a01b031663d21220a76040518163ffffffff1660e01b815260040160206040518083038186803b158015611ae657600080fd5b505afa158015611afa573d6000803e3d6000fd5b505050506040513d6020811015611b1057600080fd5b50516001600160a01b0316815260208181019290925260409081016000908120548782526004909352908120908b8b86818110611b4957fe5b905060200201356001600160a01b03166001600160a01b03166001600160a01b03168152602001908152602001600020600501819055507f6346157cec3517277c4432f0cadd5827afec2f2ae099467171840826032c419a848a8a85818110611bae57fe5b905060200201356001600160a01b03166004600088815260200190815260200160002060008d8d88818110611bdf57fe5b905060200201356001600160a01b03166001600160a01b03166001600160a01b03168152602001908152602001600020600001546004600089815260200190815260200160002060008e8e89818110611c3457fe5b905060200201356001600160a01b03166001600160a01b03166001600160a01b0316815260200190815260200160002060040154600460008a815260200190815260200160002060008f8f8a818110611c8957fe5b905060200201356001600160a01b03166001600160a01b03166001600160a01b031681526020019081526020016000206005015460405180868152602001856001600160a01b031681526020018481526020018381526020018281526020019550505050505060405180910390a15b6000848152600360205260408120908a8a85818110611d1357fe5b602090810292909201356001600160a01b03168352508101919091526040016000205460ff16611dc95760008481526003602052604081206001918b8b86818110611d5a57fe5b905060200201356001600160a01b03166001600160a01b03166001600160a01b0316815260200190815260200160002060006101000a81548160ff02191690831515021790555060028481548110611dae57fe5b60009182526020909120600460059092020101805460010190555b5060010161170e565b506020830151611efd574260028381548110611dea57fe5b906000526020600020906005020160010181905550603c420160028381548110611e1057fe5b906000526020600020906005020160020181905550610e10420160028381548110611e3757fe5b9060005260206000209060050201600301819055507f8ad0597611df84f6f628e0d5d1a1c2252c12e77db97b081825a8bc9968bdf3c18260028481548110611e7b57fe5b90600052602060002090600502016001015460028581548110611e9a57fe5b90600052602060002090600502016002015460028681548110611eb957fe5b9060005260206000209060050201600301546040518085815260200184815260200183815260200182815260200194505050505060405180910390a1611efd610643565b505050505050505050565b60028181548110611f1857600080fd5b6000918252602090912060059091020180546001820154600283015460038401546004909401549294509092909185565b3390565b604080516001600160a01b0380861660248301528416604482015260648082018490528251808303909101815260849091019091526020810180516001600160e01b03166323b872dd60e01b179052611fa790859061211f565b50505050565b3b151590565b61124c82826040516024018080602001838152602001828103825284818151815260200191508051906020019080838360005b83811015611ffe578181015183820152602001611fe6565b50505050905090810190601f16801561202b5780820380516001836020036101000a031916815260200191505b5060408051601f198184030181529190526020810180516001600160e01b03166309710a9d60e41b17905293506121d092505050565b60008082116120b7576040805162461bcd60e51b815260206004820152601a60248201527f536166654d6174683a206469766973696f6e206279207a65726f000000000000604482015290519081900360640190fd5b8183816120c057fe5b049392505050565b604080516001600160a01b038416602482015260448082018490528251808303909101815260649091019091526020810180516001600160e01b031663a9059cbb60e01b17905261211a90849061211f565b505050565b6000612174826040518060400160405280602081526020017f5361666545524332303a206c6f772d6c6576656c2063616c6c206661696c6564815250856001600160a01b03166121f19092919063ffffffff16565b80519091501561211a5780806020019051602081101561219357600080fd5b505161211a5760405162461bcd60e51b815260040180806020018281038252602a8152602001806124a5602a913960400191505060405180910390fd5b80516a636f6e736f6c652e6c6f67602083016000808483855afa5050505050565b6060612200848460008561220a565b90505b9392505050565b60608247101561224b5760405162461bcd60e51b815260040180806020018281038252602681526020018061245f6026913960400191505060405180910390fd5b61225485611fad565b6122a5576040805162461bcd60e51b815260206004820152601d60248201527f416464726573733a2063616c6c20746f206e6f6e2d636f6e7472616374000000604482015290519081900360640190fd5b600080866001600160a01b031685876040518082805190602001908083835b602083106122e35780518252601f1990920191602091820191016122c4565b6001836020036101000a03801982511681845116808217855250505050505090500191505060006040518083038185875af1925050503d8060008114612345576040519150601f19603f3d011682016040523d82523d6000602084013e61234a565b606091505b509150915061235a828286612365565b979650505050505050565b60608315612374575081612203565b8251156123845782518084602001fd5b8160405162461bcd60e51b81526004018080602001828103825283818151815260200191508051906020019080838360005b838110156123ce5781810151838201526020016123b6565b50505050905090810190601f1680156123fb5780820380516001836020036101000a031916815260200191505b509250505060405180910390fd5b6040518060a001604052806000815260200160008152602001600081526020016000815260200160008152509056fe4f776e61626c653a206e6577206f776e657220697320746865207a65726f2061646472657373416464726573733a20696e73756666696369656e742062616c616e636520666f722063616c6c4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e65725361666545524332303a204552433230206f7065726174696f6e20646964206e6f742073756363656564a264697066735822122084b8206fc30eff7b5d30e1f2b0b2b041a1a6b1e8b6af27e3f45cc9786cb6a11564736f6c63430007060033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "owner()": {
+        "details": "Returns the address of the current owner."
+      },
+      "renounceOwnership()": {
+        "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
+      },
+      "transferOwnership(address)": {
+        "details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 7,
+        "contract": "contracts/farm/LuckyPool.sol:LuckyPool",
+        "label": "_owner",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 4184,
+        "contract": "contracts/farm/LuckyPool.sol:LuckyPool",
+        "label": "receiveAmounts",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_mapping(t_contract(IKeplerPair)8522,t_mapping(t_address,t_uint256))"
+      },
+      {
+        "astId": 4231,
+        "contract": "contracts/farm/LuckyPool.sol:LuckyPool",
+        "label": "luckyInfos",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_array(t_struct(LuckyInfo)4228_storage)dyn_storage"
+      },
+      {
+        "astId": 4237,
+        "contract": "contracts/farm/LuckyPool.sol:LuckyPool",
+        "label": "luckyPairs",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_mapping(t_uint256,t_mapping(t_contract(IKeplerPair)8522,t_bool))"
+      },
+      {
+        "astId": 4306,
+        "contract": "contracts/farm/LuckyPool.sol:LuckyPool",
+        "label": "rewardInfos",
+        "offset": 0,
+        "slot": "4",
+        "type": "t_mapping(t_uint256,t_mapping(t_contract(IKeplerPair)8522,t_struct(RewardInfo)4300_storage))"
+      },
+      {
+        "astId": 4314,
+        "contract": "contracts/farm/LuckyPool.sol:LuckyPool",
+        "label": "avaliableUsers",
+        "offset": 0,
+        "slot": "5",
+        "type": "t_mapping(t_uint256,t_mapping(t_contract(IKeplerPair)8522,t_mapping(t_address,t_bool)))"
+      },
+      {
+        "astId": 4322,
+        "contract": "contracts/farm/LuckyPool.sol:LuckyPool",
+        "label": "openUsers",
+        "offset": 0,
+        "slot": "6",
+        "type": "t_mapping(t_uint256,t_mapping(t_contract(IKeplerPair)8522,t_mapping(t_address,t_bool)))"
+      },
+      {
+        "astId": 4330,
+        "contract": "contracts/farm/LuckyPool.sol:LuckyPool",
+        "label": "luckyUsers0",
+        "offset": 0,
+        "slot": "7",
+        "type": "t_mapping(t_uint256,t_mapping(t_contract(IKeplerPair)8522,t_mapping(t_address,t_uint256)))"
+      },
+      {
+        "astId": 4338,
+        "contract": "contracts/farm/LuckyPool.sol:LuckyPool",
+        "label": "luckyUsers1",
+        "offset": 0,
+        "slot": "8",
+        "type": "t_mapping(t_uint256,t_mapping(t_contract(IKeplerPair)8522,t_mapping(t_address,t_uint256)))"
+      },
+      {
+        "astId": 4830,
+        "contract": "contracts/farm/LuckyPool.sol:LuckyPool",
+        "label": "random",
+        "offset": 0,
+        "slot": "9",
+        "type": "t_contract(IRandom)8933"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_array(t_struct(LuckyInfo)4228_storage)dyn_storage": {
+        "base": "t_struct(LuckyInfo)4228_storage",
+        "encoding": "dynamic_array",
+        "label": "struct LuckyPool.LuckyInfo[]",
+        "numberOfBytes": "32"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_contract(IKeplerPair)8522": {
+        "encoding": "inplace",
+        "label": "contract IKeplerPair",
+        "numberOfBytes": "20"
+      },
+      "t_contract(IRandom)8933": {
+        "encoding": "inplace",
+        "label": "contract IRandom",
+        "numberOfBytes": "20"
+      },
+      "t_mapping(t_address,t_bool)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => bool)",
+        "numberOfBytes": "32",
+        "value": "t_bool"
+      },
+      "t_mapping(t_address,t_uint256)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => uint256)",
+        "numberOfBytes": "32",
+        "value": "t_uint256"
+      },
+      "t_mapping(t_contract(IKeplerPair)8522,t_bool)": {
+        "encoding": "mapping",
+        "key": "t_contract(IKeplerPair)8522",
+        "label": "mapping(contract IKeplerPair => bool)",
+        "numberOfBytes": "32",
+        "value": "t_bool"
+      },
+      "t_mapping(t_contract(IKeplerPair)8522,t_mapping(t_address,t_bool))": {
+        "encoding": "mapping",
+        "key": "t_contract(IKeplerPair)8522",
+        "label": "mapping(contract IKeplerPair => mapping(address => bool))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_address,t_bool)"
+      },
+      "t_mapping(t_contract(IKeplerPair)8522,t_mapping(t_address,t_uint256))": {
+        "encoding": "mapping",
+        "key": "t_contract(IKeplerPair)8522",
+        "label": "mapping(contract IKeplerPair => mapping(address => uint256))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_address,t_uint256)"
+      },
+      "t_mapping(t_contract(IKeplerPair)8522,t_struct(RewardInfo)4300_storage)": {
+        "encoding": "mapping",
+        "key": "t_contract(IKeplerPair)8522",
+        "label": "mapping(contract IKeplerPair => struct LuckyPool.RewardInfo)",
+        "numberOfBytes": "32",
+        "value": "t_struct(RewardInfo)4300_storage"
+      },
+      "t_mapping(t_uint256,t_mapping(t_contract(IKeplerPair)8522,t_bool))": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => mapping(contract IKeplerPair => bool))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_contract(IKeplerPair)8522,t_bool)"
+      },
+      "t_mapping(t_uint256,t_mapping(t_contract(IKeplerPair)8522,t_mapping(t_address,t_bool)))": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => mapping(contract IKeplerPair => mapping(address => bool)))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_contract(IKeplerPair)8522,t_mapping(t_address,t_bool))"
+      },
+      "t_mapping(t_uint256,t_mapping(t_contract(IKeplerPair)8522,t_mapping(t_address,t_uint256)))": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => mapping(contract IKeplerPair => mapping(address => uint256)))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_contract(IKeplerPair)8522,t_mapping(t_address,t_uint256))"
+      },
+      "t_mapping(t_uint256,t_mapping(t_contract(IKeplerPair)8522,t_struct(RewardInfo)4300_storage))": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => mapping(contract IKeplerPair => struct LuckyPool.RewardInfo))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_contract(IKeplerPair)8522,t_struct(RewardInfo)4300_storage)"
+      },
+      "t_struct(LuckyInfo)4228_storage": {
+        "encoding": "inplace",
+        "label": "struct LuckyPool.LuckyInfo",
+        "members": [
+          {
+            "astId": 4219,
+            "contract": "contracts/farm/LuckyPool.sol:LuckyPool",
+            "label": "beginAt",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 4221,
+            "contract": "contracts/farm/LuckyPool.sol:LuckyPool",
+            "label": "countAt",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 4223,
+            "contract": "contracts/farm/LuckyPool.sol:LuckyPool",
+            "label": "openAt",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 4225,
+            "contract": "contracts/farm/LuckyPool.sol:LuckyPool",
+            "label": "finishAt",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 4227,
+            "contract": "contracts/farm/LuckyPool.sol:LuckyPool",
+            "label": "luckyPairsNum",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_uint256"
+          }
+        ],
+        "numberOfBytes": "160"
+      },
+      "t_struct(RewardInfo)4300_storage": {
+        "encoding": "inplace",
+        "label": "struct LuckyPool.RewardInfo",
+        "members": [
+          {
+            "astId": 4289,
+            "contract": "contracts/farm/LuckyPool.sol:LuckyPool",
+            "label": "avaliableUserNum",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 4291,
+            "contract": "contracts/farm/LuckyPool.sol:LuckyPool",
+            "label": "openUserNum",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 4293,
+            "contract": "contracts/farm/LuckyPool.sol:LuckyPool",
+            "label": "bestUser",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address"
+          },
+          {
+            "astId": 4295,
+            "contract": "contracts/farm/LuckyPool.sol:LuckyPool",
+            "label": "luckyUserNum",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 4297,
+            "contract": "contracts/farm/LuckyPool.sol:LuckyPool",
+            "label": "reward0",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 4299,
+            "contract": "contracts/farm/LuckyPool.sol:LuckyPool",
+            "label": "reward1",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_uint256"
+          }
+        ],
+        "numberOfBytes": "192"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "r",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "maxNum",
+        "type": "uint256"
+      }
+    ],
+    "name": "win",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
