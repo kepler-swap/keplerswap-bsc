@@ -68,7 +68,7 @@ module.exports = {
         deployer: {
             default: 0,
             97: '0x92Ac13DfFf2e421e53dFD2873Ea295EdC9504764',
-            56: '0x41a33c1a6b8aa7c5968303AE79d416d0889f35E1',
+            56: '0x4acCAC4AdB3D6490AA3e012438bEb33637D8a922',
         },
         /*
         admin: {
