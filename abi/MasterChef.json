@@ -68,6 +68,19 @@
     "anonymous": false,
     "inputs": [
       {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "snapshotId",
+        "type": "uint256"
+      }
+    ],
+    "name": "NewSnapshot",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
         "indexed": true,
         "internalType": "address",
         "name": "previousOwner",
@@ -131,6 +144,19 @@
     ],
     "name": "Withdraw",
     "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "RATIO",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
     "inputs": [],

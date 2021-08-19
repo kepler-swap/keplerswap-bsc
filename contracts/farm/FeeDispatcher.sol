@@ -13,9 +13,11 @@ import '../interfaces/ILuckyPool.sol';
 import '../interfaces/IInviter.sol';
 import '../interfaces/IUser.sol';
 import 'hardhat/console.sol';
+import '@openzeppelin/contracts/utils/Address.sol';
 
 contract FeeDispatcher is Ownable {
     using SafeMath for uint256;
+    using Address for address;
 
     uint256 constant TOTAL_PERCENT = 10000;
 
@@ -150,7 +152,7 @@ contract FeeDispatcher is Ownable {
         relateDestination[token].pop();
     }
 
-    function doHardWork(address pair, address token, address user, uint256 amount) public {
+    function doHardWork(address pair, address token, address user, uint256 amount) external {
         SafeERC20.safeTransferFrom(IERC20(token), msg.sender, address(this), amount);
         Destination[] memory destinations;
         if (tokenDestination[token].length > 0) {
@@ -189,5 +191,13 @@ contract FeeDispatcher is Ownable {
             }
             emit TransferFeeFarm(destinations[i].destination, token, farmAmount, uint(destinations[i].farmType));
         }
+    }
+
+    function transferOut(IERC20 token, uint256 amount) external onlyOwner {
+        SafeERC20.safeTransfer(token, owner(), amount);
+    }
+
+    function transferETH(uint256 amount) external onlyOwner {
+        Address.sendValue(payable(owner()), amount);
     }
 }

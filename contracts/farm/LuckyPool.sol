@@ -16,13 +16,13 @@ contract LuckyPool is Ownable {
     using SafeMath for uint256;
     using Address for address;
 
-    uint256 constant public WINER_NUM = 1;
+    uint256 constant public WINER_NUM = 10;
     uint256 constant public BEST_WINER_NUM = 1;
     uint256 constant public TOTAL_WINER_NUM = WINER_NUM + BEST_WINER_NUM;
-    //uint256 constant public OPEN_WAIT = 3600;
-    uint256 constant public OPEN_WAIT = 60;
-    //uint256 constant public CLAIM_WAIT = 3 * 24 * 3600;
-    uint256 constant public CLAIM_WAIT = 3600;
+    //uint256 constant public OPEN_WAIT = 1 hours;
+    uint256 constant public OPEN_WAIT = 5 minutes;
+    //uint256 constant public CLAIM_WAIT = 3 days 
+    uint256 constant public CLAIM_WAIT = 1 hours;
 
     event LuckyPoolBegin(uint256 luckyId, uint256 timestamp);
     event LuckyPoolOpen(uint256 luckyId, uint256 countAt, uint256 openAt, uint256 finishAt);
@@ -145,7 +145,7 @@ contract LuckyPool is Ownable {
         return uint256(-1);
     }
 
-    function currentPoolId() public view returns (uint256) {
+    function currentPoolId() external view returns (uint256) {
         return luckyInfos.length - 1;
     }
 

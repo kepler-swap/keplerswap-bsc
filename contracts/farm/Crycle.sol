@@ -10,9 +10,11 @@ import '../interfaces/IKeplerToken.sol';
 import '../interfaces/IKeplerPair.sol';
 import '../interfaces/IMasterChef.sol';
 import '../interfaces/IUser.sol';
+import '@openzeppelin/contracts/utils/Address.sol';
 
 contract Crycle is Ownable {
     using SafeMath for uint256;
+    using Address for address;
 
     event NewCrycle(address creator, string title, string mainfest, string telegram, uint256 timestamp);
     event NewTitle(address creator, string oldTitle, string newTitle, uint256 timestamp);
@@ -22,12 +24,12 @@ contract Crycle is Ownable {
     event NewVoteInfo(uint256 voteId, uint256 beginAt, uint256 countAt, uint256 finishAt, uint256 reward);
     event NewVote(uint256 voteId, address user, address crycle, uint256 num, uint totalSended, uint totalReceived);
 
-    IUser public user;
-    IMasterChef public masterChef;
+    IUser public immutable user;
+    IMasterChef public immutable masterChef;
     IKeplerPair[] public pairs;
-    IERC20 public busd;
-    IKeplerToken public sds;
-    IKeplerFactory public factory;
+    IERC20 public immutable busd;
+    IKeplerToken public immutable sds;
+    IKeplerFactory public immutable factory;
 
     uint256 constant public MIN_LOCK_AMOUNT = 500 * 1e18;
     uint256 constant public MIN_INVITER_AMOUNT = 5000 * 1e18;
@@ -103,6 +105,7 @@ contract Crycle is Ownable {
     }
 
     function createCrycle(string memory title, string memory mainfest, string memory telegram) external {
+        require(!address(msg.sender).isContract(), "contract can not create crycle");
         require(bytes(title).length <= 32, "title too long");
         require(bytes(mainfest).length <= 1024, "mainfest too long");
         require(bytes(telegram).length <= 256, "mainfest too long");
@@ -118,8 +121,8 @@ contract Crycle is Ownable {
         });
         userCrycle[msg.sender] = msg.sender;
         crycles[msg.sender].userNum = crycles[msg.sender].userNum + 1;
-        emit NewUser(msg.sender, msg.sender, crycles[msg.sender].userNum, block.timestamp);
         emit NewCrycle(msg.sender, title, mainfest, telegram, block.timestamp);
+        emit NewUser(msg.sender, msg.sender, crycles[msg.sender].userNum, block.timestamp);
     }
 
     function setTitle(string memory title) external {
