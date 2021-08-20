@@ -162,6 +162,7 @@ contract MasterChef is Ownable {
     }
 
     function inviterClear(IKeplerPair _pair, address _user) internal {
+        _user = user.inviter(_user);
         if (inviterUserInfo[_pair][_user].shares > 0) {
             uint userShares = userInfo[_pair][_user].shares;
             uint256 token0Debt = inviterUserInfo[_pair][_user].shares.mul(inviterPoolInfo[_pair].token0AccPerShare).div(RATIO);
