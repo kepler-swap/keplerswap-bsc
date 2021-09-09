@@ -6,3 +6,4 @@ artifacts
 .secret
 .env
 .DS_Store
+doc
