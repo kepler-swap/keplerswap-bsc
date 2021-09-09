@@ -30,6 +30,7 @@ contract Crycle is Ownable {
     IERC20 public immutable busd;
     IKeplerToken public immutable sds;
     IKeplerFactory public immutable factory;
+    uint256 public totalDelt;
 
     uint256 constant public MIN_LOCK_AMOUNT = 500 * 1e18;
     uint256 constant public MIN_INVITER_AMOUNT = 5000 * 1e18;
@@ -185,16 +186,19 @@ contract Crycle is Ownable {
     }
 
     function startVote(uint256 beginAt, uint256 countAt, uint256 finishAt) external onlyOwner {
+        require(beginAt <= countAt && countAt <= finishAt, "illegal time");
         if (voteInfo.length > 0) { //check if last vote finish
             require(block.timestamp > voteInfo[voteInfo.length - 1].finishAt, "last vote not finish");
         }
 
+        uint currentBalance = sds.balanceOf(address(this));
         voteInfo.push(VoteInfo({
             beginAt: beginAt,
             countAt: countAt,
             finishAt: finishAt,
-            reward: sds.balanceOf(address(this))
+            reward: currentBalance.sub(totalDelt)
         }));
+        totalDelt = currentBalance;
         uint _currentVoteId = voteInfo.length;
         masterChef.createSnapshot(_currentVoteId);
         sds.createSnapshot(_currentVoteId);
@@ -248,9 +252,11 @@ contract Crycle is Ownable {
 
     function claim(uint _voteId, address _user) external {
         if (voteReward[_voteId][_user] > 0) {
-            sds.transfer(_user, voteReward[_voteId][_user]);
+            uint amount = voteReward[_voteId][_user];
+            voteReward[_voteId][_user] = 0;
+            totalDelt = totalDelt.sub(amount);
+            sds.transfer(_user, amount);
         }
-        voteReward[_voteId][_user] = 0;
     }
 
 }

@@ -6,6 +6,7 @@ import '@openzeppelin/contracts/math/SafeMath.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import '@openzeppelin/contracts/token/ERC20/SafeERC20.sol';
+import '@openzeppelin/contracts/utils/ReentrancyGuard.sol';
 import '../interfaces/IKeplerPair.sol';
 import '../interfaces/IKeplerRouter.sol';
 import '../interfaces/IUser.sol';
@@ -13,7 +14,7 @@ import '../interfaces/IWETH.sol';
 import '../libraries/KeplerLibrary.sol';
 import 'hardhat/console.sol';
 
-contract MasterChef is Ownable {
+contract MasterChef is Ownable, ReentrancyGuard {
     using SafeMath for uint256;
 
     IUser user;
@@ -162,7 +163,6 @@ contract MasterChef is Ownable {
     }
 
     function inviterClear(IKeplerPair _pair, address _user) internal {
-        _user = user.inviter(_user);
         if (inviterUserInfo[_pair][_user].shares > 0) {
             uint userShares = userInfo[_pair][_user].shares;
             uint256 token0Debt = inviterUserInfo[_pair][_user].shares.mul(inviterPoolInfo[_pair].token0AccPerShare).div(RATIO);
@@ -268,7 +268,7 @@ contract MasterChef is Ownable {
         inviterUserInfo[_pair][_inviter].token1Debt = _userInfo.shares.sub(_shares).mul(_poolInfo.token1AccPerShare).div(RATIO);
     }
 
-    function withdraw(IKeplerPair _pair, uint256 _lockId) external {
+    function withdraw(IKeplerPair _pair, uint256 _lockId, uint256 amount0Min, uint256 amount1Min) external nonReentrant {
         UserLockInfo memory _userLockInfo = userLockInfo[_pair][msg.sender][_lockId];
         require(_userLockInfo.amount > 0, "illegal lock id");
         require (block.timestamp >= _userLockInfo.expireAt, "not the right time");
@@ -284,26 +284,29 @@ contract MasterChef is Ownable {
             inviterClear(_pair, msg.sender);
             inviterPoolInfo[_pair].totalShares = inviterPoolInfo[_pair].totalShares.sub(inviterUserInfo[_pair][msg.sender].shares);
         }
+        uint amount0 = 0;
+        uint amount1 = 0;
         if (_userLockInfo.amount > 0) {
             address token0 = _pair.token0();
             address token1 = _pair.token1();
-            _pair.transfer(address(_pair), _userLockInfo.amount); // send liquidity to pair
+            SafeERC20.safeTransfer(IERC20(address(_pair)), address(_pair), _userLockInfo.amount);
             if (token0 == WETH) {
-                (uint amount0, uint amount1) = _pair.burn(address(this));
+                (amount0, amount1) = _pair.burn(address(this));
                 SafeERC20.safeTransfer(IERC20(token1), msg.sender, amount1);
                 IWETH(WETH).withdraw(amount0);
                 (bool success,) = msg.sender.call{value:amount0}(new bytes(0));
                 require(success, 'TransferHelper: ETH_TRANSFER_FAILED');
             } else if (token1 == WETH) {
-                (uint amount0, uint amount1) = _pair.burn(address(this));
+                (amount0, amount1) = _pair.burn(address(this));
                 SafeERC20.safeTransfer(IERC20(token0), msg.sender, amount0);
                 IWETH(WETH).withdraw(amount1);
                 (bool success,) = msg.sender.call{value:amount1}(new bytes(0));
                 require(success, 'TransferHelper: ETH_TRANSFER_FAILED');
             } else {
-                _pair.burn(msg.sender);
+                (amount0, amount1) = _pair.burn(msg.sender);
             }
         }
+        require(amount0 >= amount0Min && amount1 >= amount1Min, "illegal witdraw slippage");
         uint256 _amount = _userLockInfo.amount;
         uint256 _shares = _userLockInfo.shares;
         delete userLockInfo[_pair][msg.sender][_lockId];
@@ -383,7 +386,7 @@ contract MasterChef is Ownable {
         token1Pending = _userInfo.token1Pending;
     }
 
-    function claimMine(IKeplerPair _pair, address _token) external {
+    function claimMine(IKeplerPair _pair, address _token) external nonReentrant {
         address token0 = _pair.token0();
         address token1 = _pair.token1();
         uint amount = 0;
@@ -409,7 +412,7 @@ contract MasterChef is Ownable {
         SafeERC20.safeTransfer(IERC20(_token), msg.sender, amount);
     }
 
-    function claimInviteMine(IKeplerPair _pair, address _token) external {
+    function claimInviteMine(IKeplerPair _pair, address _token) external nonReentrant {
         address token0 = _pair.token0();
         address token1 = _pair.token1();
         uint amount = userInfo[_pair][msg.sender].amount;

@@ -901,6 +901,16 @@
         "internalType": "uint256",
         "name": "_lockId",
         "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount0Min",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount1Min",
+        "type": "uint256"
       }
     ],
     "name": "withdraw",
