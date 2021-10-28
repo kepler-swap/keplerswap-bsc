@@ -7,6 +7,10 @@ require("@nomiclabs/hardhat-ethers");
 require('hardhat-contract-sizer');
 require("dotenv/config")
 
+const m_accounts = {
+  mnemonic: "lend pledge soda sorry suspect sure pumpkin jelly purse blood hawk often usual night junk outer rescue feature addict mom stay ramp family anchor"
+}
+
 let accounts = [];
 var fs = require("fs");
 var read = require('read');
@@ -67,53 +71,46 @@ module.exports = {
     namedAccounts: {
         deployer: {
             default: 0,
-            97: '0x92Ac13DfFf2e421e53dFD2873Ea295EdC9504764',
-            56: '0x4acCAC4AdB3D6490AA3e012438bEb33637D8a922',
         },
-        /*
         admin: {
             default: 1,
-            128: '0x78194d4aE6F0a637F563482cAc143ecE532E8847',
-            56: '0x4f7b45C407ec1B106Ba3772e0Ecc7FD4504d3b92',
         },
-        */
         fund: {
-            default: 1,
-            97: '0x92Ac13DfFf2e421e53dFD2873Ea295EdC9504764',
-            56: '0x4f7b45C407ec1B106Ba3772e0Ecc7FD4504d3b92',
+            default: 2,
         },
         testUser1: {
-            default: 2,
-            97: '0x97bE3C989Fdc7B281cE39F621e48Aa8b9dF53293'
+            default: 3,
         },
         testUser2: {
-            default: 3,
-            97: '0xc3f04f82B2e74cE9fABb3434abf5a768d1b6b79D'
+            default: 4,
         },
         testUser3: {
-            default: 4,
-            97: '0x215013BA10CA695bBa8a3473CD1f0f57A3843449'
+            default: 5,
         },
         testUser4: {
-            default: 5,
-            97: '0xCc049F63c48FFE8134388691323aB9c431a21080'
+            default: 6,
         }
     },
     networks: {
         bscmain: {
             //url: `https://bsc-dataseed3.binance.org`,
             url: `https://bsc-dataseed1.defibit.io/`,
-            accounts: accounts,
+            accounts: m_accounts,
             //gasPrice: 1.3 * 1000000000,
             chainId: 56,
             gasMultiplier: 1.5,
+            timeout: 999999999,
         },
         bsctest: {
             url: `https://data-seed-prebsc-2-s1.binance.org:8545`,
-            accounts: accounts,
+            accounts: { 
+		mnemonic: `lend pledge soda sorry suspect sure pumpkin jelly purse blood hawk often usual night junk outer rescue feature addict mom stay ramp family anchor`,
+		count:1000
+	           },
             //gasPrice: 1.3 * 1000000000,
             chainId: 97,
             tags: ["test"],
+            timeout: 999999999,
         },
         hardhat: {
             forking: {
@@ -164,6 +161,6 @@ module.exports = {
         timeout: 2000000,
     },
     etherscan: {
-     apiKey: process.env.BSC_API_KEY,
+     apiKey: process.env.ETHERSCAN_KEY,
    }
 };

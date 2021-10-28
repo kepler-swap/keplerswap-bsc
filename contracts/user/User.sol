@@ -21,7 +21,6 @@ contract User {
         if (userNum > 0) {
             require(inviter[_inviter] != address(0), "inviter not exists");
         }
-        require(inviter[msg.sender] == address(0), "already registed");
         inviter[msg.sender] = _inviter;
         userNum = userNum.add(1);
         inviteNum[_inviter] = inviteNum[_inviter].add(1);

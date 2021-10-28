@@ -6,7 +6,6 @@ import '@openzeppelin/contracts/math/SafeMath.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import '@openzeppelin/contracts/token/ERC20/SafeERC20.sol';
-import '@openzeppelin/contracts/utils/ReentrancyGuard.sol';
 import '../interfaces/IKeplerPair.sol';
 import '../interfaces/IKeplerRouter.sol';
 import '../interfaces/IUser.sol';
@@ -14,7 +13,7 @@ import '../interfaces/IWETH.sol';
 import '../libraries/KeplerLibrary.sol';
 import 'hardhat/console.sol';
 
-contract MasterChef is Ownable, ReentrancyGuard {
+contract MasterChef is Ownable {
     using SafeMath for uint256;
 
     IUser user;
@@ -24,7 +23,6 @@ contract MasterChef is Ownable, ReentrancyGuard {
     mapping(IKeplerPair => mapping(address => uint256)) userSnapshotId;
     mapping(IKeplerPair => mapping(address => uint256)) userSnapshotAmount;
     address public snapshotCreateCaller;
-    uint256 constant public RATIO = 1e18;
 
     struct UserLockInfo {
         uint256 amount;     
@@ -59,9 +57,10 @@ contract MasterChef is Ownable, ReentrancyGuard {
     mapping(IKeplerPair => PoolInfo) public inviterPoolInfo;
     mapping(IKeplerPair => mapping(address => UserInfo)) public inviterUserInfo;
 
+    uint256 constant RATIO = 1e18;
+
     event Deposit(address indexed user, address indexed inviter, address indexed pair, uint256 lockId, uint256 amount, uint256 shares, uint256 lockType);
     event Withdraw(address indexed user, address indexed inviter, address indexed pair, uint256 lockId, uint256 amount, uint256 shares, uint256 lockType);
-    event NewSnapshot(uint256 snapshotId);
 
     constructor(IUser _user, address _weth) {
         user = _user;
@@ -85,7 +84,7 @@ contract MasterChef is Ownable, ReentrancyGuard {
         _inviterPoolInfo.avaliable = true;
     }
 
-    function doMiner(IKeplerPair pair, IERC20 token, uint256 amount) external {
+    function doMiner(IKeplerPair pair, IERC20 token, uint256 amount) public {
         addDefaultPool(pair);
         address _token0 = pair.token0();
         address _token1 = pair.token1();
@@ -103,7 +102,7 @@ contract MasterChef is Ownable, ReentrancyGuard {
         }
     }
 
-    function doInviteMiner(IKeplerPair pair, IERC20 token, uint256 amount) external {
+    function doInviteMiner(IKeplerPair pair, IERC20 token, uint256 amount) public {
         addDefaultPool(pair);
         address _token0 = pair.token0();
         address _token1 = pair.token1();
@@ -183,16 +182,13 @@ contract MasterChef is Ownable, ReentrancyGuard {
         if (lockType == 0) {
             return (3, 0); 
         } else if (lockType == 1) {
-            return (10, 30 days);
-            //return (10, 30 * 24 * 60 * 60);
+            return (10, 30 * 24 * 60 * 60);
         } else if (lockType == 2) {
-            return (15, 90 days);
-            //return (15, 90 * 24 * 60 * 60);
+            return (15, 90 * 24 * 60 * 60);
         } else if (lockType == 3) {
-            return (30, 360 days);
-            //return (30, 360* 24 * 60 * 60);
+            return (30, 360* 24 * 60 * 60);
         } else {
-            revert ("illegal lockType");
+            require (false, "illegal lockType");
         }
         return (0, 0);
     }
@@ -219,7 +215,6 @@ contract MasterChef is Ownable, ReentrancyGuard {
     }
 
     function depositFor(IKeplerPair _pair, uint256 _amount, uint256 _lockType, address to) public {
-        _beforeDepositOrWithdraw(_pair, to, _amount);
         addDefaultPool(_pair);
         (uint ratio, uint lockTime) = getType(_lockType);
         PoolInfo memory _poolInfo = poolInfo[_pair];
@@ -268,13 +263,12 @@ contract MasterChef is Ownable, ReentrancyGuard {
         inviterUserInfo[_pair][_inviter].token1Debt = _userInfo.shares.sub(_shares).mul(_poolInfo.token1AccPerShare).div(RATIO);
     }
 
-    function withdraw(IKeplerPair _pair, uint256 _lockId, uint256 amount0Min, uint256 amount1Min) external nonReentrant {
+    function withdraw(IKeplerPair _pair, uint256 _lockId) external {
         UserLockInfo memory _userLockInfo = userLockInfo[_pair][msg.sender][_lockId];
         require(_userLockInfo.amount > 0, "illegal lock id");
         require (block.timestamp >= _userLockInfo.expireAt, "not the right time");
         PoolInfo memory _poolInfo = poolInfo[_pair];
         UserInfo memory _userInfo = userInfo[_pair][msg.sender];
-        _beforeDepositOrWithdraw(_pair, msg.sender, _userInfo.amount);
         userClear(_pair, msg.sender, _poolInfo, _userInfo);
         poolInfo[_pair].totalShares = _poolInfo.totalShares.sub(_userLockInfo.shares); 
         userInfo[_pair][msg.sender].shares = _userInfo.shares.sub(_userLockInfo.shares);
@@ -284,29 +278,26 @@ contract MasterChef is Ownable, ReentrancyGuard {
             inviterClear(_pair, msg.sender);
             inviterPoolInfo[_pair].totalShares = inviterPoolInfo[_pair].totalShares.sub(inviterUserInfo[_pair][msg.sender].shares);
         }
-        uint amount0 = 0;
-        uint amount1 = 0;
         if (_userLockInfo.amount > 0) {
             address token0 = _pair.token0();
             address token1 = _pair.token1();
-            SafeERC20.safeTransfer(IERC20(address(_pair)), address(_pair), _userLockInfo.amount);
+            _pair.transfer(address(_pair), _userLockInfo.amount); // send liquidity to pair
             if (token0 == WETH) {
-                (amount0, amount1) = _pair.burn(address(this));
+                (uint amount0, uint amount1) = _pair.burn(address(this));
                 SafeERC20.safeTransfer(IERC20(token1), msg.sender, amount1);
                 IWETH(WETH).withdraw(amount0);
                 (bool success,) = msg.sender.call{value:amount0}(new bytes(0));
                 require(success, 'TransferHelper: ETH_TRANSFER_FAILED');
             } else if (token1 == WETH) {
-                (amount0, amount1) = _pair.burn(address(this));
+                (uint amount0, uint amount1) = _pair.burn(address(this));
                 SafeERC20.safeTransfer(IERC20(token0), msg.sender, amount0);
                 IWETH(WETH).withdraw(amount1);
                 (bool success,) = msg.sender.call{value:amount1}(new bytes(0));
                 require(success, 'TransferHelper: ETH_TRANSFER_FAILED');
             } else {
-                (amount0, amount1) = _pair.burn(msg.sender);
+                _pair.burn(msg.sender);
             }
         }
-        require(amount0 >= amount0Min && amount1 >= amount1Min, "illegal witdraw slippage");
         uint256 _amount = _userLockInfo.amount;
         uint256 _shares = _userLockInfo.shares;
         delete userLockInfo[_pair][msg.sender][_lockId];
@@ -318,10 +309,7 @@ contract MasterChef is Ownable, ReentrancyGuard {
 
     function createSnapshot(uint256 id) external {
         require(msg.sender == snapshotCreateCaller, "only snapshotCreateCaller can do this");
-        require(id > currentSnapshotId, "illegal snapshotId");
-        require(id < currentSnapshotId + 100, "snapshot id too big");
         currentSnapshotId = id; 
-        emit NewSnapshot(currentSnapshotId);
     }
 
     function getUserSnapshot(address pair, address _user) external view returns (uint256) {
@@ -334,7 +322,10 @@ contract MasterChef is Ownable, ReentrancyGuard {
         }
     }
 
-    function _beforeDepositOrWithdraw(IKeplerPair pair, address _user, uint256) internal {
+    function _beforeDepositOrWithdraw(IKeplerPair pair, address _user, uint256 amount) internal {
+        if (false) {
+            amount;
+        }
         if (currentSnapshotId == 0) {
             return;
         }
@@ -386,7 +377,7 @@ contract MasterChef is Ownable, ReentrancyGuard {
         token1Pending = _userInfo.token1Pending;
     }
 
-    function claimMine(IKeplerPair _pair, address _token) external nonReentrant {
+    function claimMine(IKeplerPair _pair, address _token) external {
         address token0 = _pair.token0();
         address token1 = _pair.token1();
         uint amount = 0;
@@ -395,16 +386,16 @@ contract MasterChef is Ownable, ReentrancyGuard {
             uint shares = userInfo[_pair][msg.sender].shares;
             uint debt = userInfo[_pair][msg.sender].token0Debt;
             uint pending = userInfo[_pair][msg.sender].token0Pending;
-            amount = acc.mul(shares).div(RATIO).sub(debt).add(pending);
-            userInfo[_pair][msg.sender].token0Debt = acc.mul(shares).div(RATIO);
+            amount = acc.mul(shares).div(1e18).sub(debt).add(pending);
+            userInfo[_pair][msg.sender].token0Debt = acc.mul(shares).div(1e18);
             userInfo[_pair][msg.sender].token0Pending = 0;
         } else if (_token == token1) {
             uint acc = poolInfo[_pair].token1AccPerShare;
             uint shares = userInfo[_pair][msg.sender].shares;
             uint debt = userInfo[_pair][msg.sender].token1Debt;
             uint pending = userInfo[_pair][msg.sender].token1Pending;
-            amount = acc.mul(shares).div(RATIO).sub(debt).add(pending);
-            userInfo[_pair][msg.sender].token1Debt = acc.mul(shares).div(RATIO);
+            amount = acc.mul(shares).div(1e18).sub(debt).add(pending);
+            userInfo[_pair][msg.sender].token1Debt = acc.mul(shares).div(1e18);
             userInfo[_pair][msg.sender].token1Pending = 0;
         } else {
             require(false, "illegal token");
@@ -412,7 +403,7 @@ contract MasterChef is Ownable, ReentrancyGuard {
         SafeERC20.safeTransfer(IERC20(_token), msg.sender, amount);
     }
 
-    function claimInviteMine(IKeplerPair _pair, address _token) external nonReentrant {
+    function claimInviteMine(IKeplerPair _pair, address _token) external {
         address token0 = _pair.token0();
         address token1 = _pair.token1();
         uint amount = userInfo[_pair][msg.sender].amount;
@@ -424,16 +415,16 @@ contract MasterChef is Ownable, ReentrancyGuard {
             uint shares = inviterUserInfo[_pair][msg.sender].shares;
             uint debt = inviterUserInfo[_pair][msg.sender].token0Debt;
             uint pending = inviterUserInfo[_pair][msg.sender].token0Pending;
-            amount = acc.mul(shares).div(RATIO).sub(debt).add(pending);
-            inviterUserInfo[_pair][msg.sender].token0Debt = acc.mul(shares).div(RATIO);
+            amount = acc.mul(shares).div(1e18).sub(debt).add(pending);
+            inviterUserInfo[_pair][msg.sender].token0Debt = acc.mul(shares).div(1e18);
             inviterUserInfo[_pair][msg.sender].token0Pending = 0;
         } else if (_token == token1) {
             uint acc = inviterPoolInfo[_pair].token1AccPerShare;
             uint shares = inviterUserInfo[_pair][msg.sender].shares;
             uint debt = inviterUserInfo[_pair][msg.sender].token1Debt;
             uint pending = inviterUserInfo[_pair][msg.sender].token1Pending;
-            amount = acc.mul(shares).div(RATIO).sub(debt).add(pending);
-            inviterUserInfo[_pair][msg.sender].token1Debt = acc.mul(shares).div(RATIO);
+            amount = acc.mul(shares).div(1e18).sub(debt).add(pending);
+            inviterUserInfo[_pair][msg.sender].token1Debt = acc.mul(shares).div(1e18);
             inviterUserInfo[_pair][msg.sender].token1Pending = 0;
         } else {
             require(false, "illegal token");

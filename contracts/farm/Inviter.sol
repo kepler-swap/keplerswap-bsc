@@ -6,9 +6,8 @@ import '@openzeppelin/contracts/math/SafeMath.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import '@openzeppelin/contracts/token/ERC20/SafeERC20.sol';
 import '../interfaces/IUser.sol';
-import '@openzeppelin/contracts/utils/ReentrancyGuard.sol';
 
-contract Inviter is ReentrancyGuard {
+contract Inviter {
     using SafeMath for uint256;
 
     IUser user;
@@ -18,10 +17,9 @@ contract Inviter is ReentrancyGuard {
         user = _user;
     }
 
-    function doHardWork(address _user, address _token, uint256 _amount) external nonReentrant {
+    function doHardWork(address _user, address _token, uint256 _amount) external {
         SafeERC20.safeTransferFrom(IERC20(_token), msg.sender, address(this), _amount);
         address _inviter = user.inviter(_user);
-        require(_inviter != address(0), "inviter not exist");
         profits[_inviter][_token] = profits[_inviter][_token].add(_amount);
     }
 

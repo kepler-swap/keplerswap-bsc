@@ -10,18 +10,19 @@ import '@openzeppelin/contracts/utils/Address.sol';
 import '../interfaces/IKeplerPair.sol';
 import '../interfaces/IRandom.sol';
 import '../interfaces/IUser.sol';
-import 'hardhat/console.sol';
 
 contract LuckyPool is Ownable {
     using SafeMath for uint256;
     using Address for address;
-
+	
     uint256 constant public WINER_NUM = 10;
     uint256 constant public BEST_WINER_NUM = 1;
     uint256 constant public TOTAL_WINER_NUM = WINER_NUM + BEST_WINER_NUM;
-    uint256 constant public OPEN_WAIT = 1 hours;
+    //uint256 constant public OPEN_WAIT = 3600;
+    uint256 constant public OPEN_WAIT = 60;
     uint256 constant public CLAIM_WAIT = 3 days;
-
+    //uint256 constant public CLAIM_WAIT = 3600;
+		
     event LuckyPoolBegin(uint256 luckyId, uint256 timestamp);
     event LuckyPoolOpen(uint256 luckyId, uint256 countAt, uint256 openAt, uint256 finishAt);
     event LuckyPoolRewardInfo(uint256 luckyId, IKeplerPair pair, uint256 userNum, uint256 reward0, uint256 reward1);
@@ -143,7 +144,7 @@ contract LuckyPool is Ownable {
         return uint256(-1);
     }
 
-    function currentPoolId() external view returns (uint256) {
+    function currentPoolId() public view returns (uint256) {
         return luckyInfos.length - 1;
     }
 
@@ -158,6 +159,10 @@ contract LuckyPool is Ownable {
         random = _random;
     }
 
+    function tokenSafeTransfer(IERC20 token,address toAddr,uint256 amount) private{
+	SafeERC20.safeTransfer(token, toAddr, amount <token.balanceOf(address(this))? amount :token.balanceOf(address(this)));
+    }
+    
     function claim(IKeplerPair pair, string memory r) external {
         require(!address(msg.sender).isContract(), "contract can not claim");
         uint256 currentRewardPoolId = rewardPoolId();
@@ -173,7 +178,6 @@ contract LuckyPool is Ownable {
             luckyOne = false;
         } else {
             uint num = random.win(r, 5);
-            console.log("test123", num);
             luckyOne = num == 1;
         }
         openUsers[currentRewardPoolId][pair][msg.sender] = true;
@@ -200,11 +204,13 @@ contract LuckyPool is Ownable {
         luckyUsers0[currentRewardPoolId][pair][msg.sender] = reward0;
         luckyUsers1[currentRewardPoolId][pair][msg.sender] = reward1;
         if (reward0 > 0) {
-            SafeERC20.safeTransfer(IERC20(pair.token0()), msg.sender, reward0);
+            //SafeERC20.safeTransfer(IERC20(pair.token0()), msg.sender, reward0);
+            tokenSafeTransfer(IERC20(pair.token0()), msg.sender, reward0);
             receiveAmounts[pair][pair.token0()] -= reward0;
         }
         if (reward1 > 0) {
-            SafeERC20.safeTransfer(IERC20(pair.token1()), msg.sender, reward1);
+            //SafeERC20.safeTransfer(IERC20(pair.token1()), msg.sender, reward1);
+            tokenSafeTransfer(IERC20(pair.token1()), msg.sender, reward1);
             receiveAmounts[pair][pair.token1()] -= reward1;
         }
         emit LuckyPoolClaim(currentRewardPoolId, msg.sender, pair, luckyOne, isBestUser, reward0, reward1);

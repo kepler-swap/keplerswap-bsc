@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.7.6;
+pragma solidity >=0.7.2;
 
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import '@openzeppelin/contracts/token/ERC20/ERC20Capped.sol';
@@ -14,8 +14,6 @@ contract KeplerToken is ERC20Capped, Ownable {
     mapping(address => uint256) userSnapshotAmount;
     address public snapshotCreateCaller;
     uint256 public MAX_SUPPLY = 21 * 10 ** 8 * 10 ** 18;
-
-    event NewSnapshot(uint256 snapshotId);
 
     constructor(string memory name_, string memory symbol_, uint8 decimals_) ERC20(name_, symbol_) ERC20Capped(MAX_SUPPLY) {
         if (decimals_ != 18) {
@@ -34,9 +32,7 @@ contract KeplerToken is ERC20Capped, Ownable {
     function createSnapshot(uint256 id) external {
         require(msg.sender == snapshotCreateCaller, "only snapshotCreateCaller can do this");
         require(id > currentSnapshotId, "illegal snapshotId");
-        require(id < currentSnapshotId + 100, "snapshot id too big");
         currentSnapshotId = id; 
-        emit NewSnapshot(currentSnapshotId);
     }
 
     function getUserSnapshot(address user) external view returns (uint256) {

@@ -21,8 +21,6 @@ module.exports = async function ({
     if (currentFeeTo != feeDispatcher.address) {
         tx = await keplerFactory.connect(deployer).setFeeTo(feeDispatcher.address);
         tx = await tx.wait();
-        console.dir("set feeTo: " + feeDispatcher.address);
-        console.dir(tx);
     }
 
     let keplerToken = await ethers.getContract('KeplerToken');
